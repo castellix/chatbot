@@ -229,7 +229,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     <aside class="panel" id="panel" aria-label="Details"></aside>
   </div>
 
-  <footer>Version 2.2 · 22 October 2026 · Adds the ArchiMate views; 2.1 added constraints C15 to C23 · Bank-wide scope: daily banking, credit and investments, with investments offered execution-only in the app. Capabilities are what the bank must be able to do; constraints are rules it complies with or not; dependencies are capabilities the bank already has for every channel.</footer>
+  <footer>Version 2.3 · 23 October 2026 · Adds C24 No valuations or investment verdicts; 2.2 added the ArchiMate views, 2.1 constraints C15 to C23 · Bank-wide scope: daily banking, credit and investments, with investments offered execution-only in the app. Capabilities are what the bank must be able to do; constraints are rules it complies with or not; dependencies are capabilities the bank already has for every channel.</footer>
 </div>
 
 <script>
@@ -312,7 +312,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
       reg('Uses', 'The capability exists and the chatbot relies on it as it is', uses) + '</div>';
   }
   function rowCon(k) {
-    return '<li><button type="button" class="row con-row" data-sel="con:' + k.id + '" aria-pressed="false"><span class="id">' + k.id + '</span><span><span class="t">' + esc(k.title) + '</span><span class="s">' + esc(k.statement) + '</span></span><span class="tags">' + (domTags(k) || '<span class="tag tag-chg">Bank-wide</span>') + (k.agentic ? '<span class="tag tag-ag">Agentic</span>' : '') + (k.added === '2.1' ? '<span class="tag tag-chg">New</span>' : '') + '</span></button></li>';
+    return '<li><button type="button" class="row con-row" data-sel="con:' + k.id + '" aria-pressed="false"><span class="id">' + k.id + '</span><span><span class="t">' + esc(k.title) + '</span><span class="s">' + esc(k.statement) + '</span></span><span class="tags">' + (domTags(k) || '<span class="tag tag-chg">Bank-wide</span>') + (k.agentic ? '<span class="tag tag-ag">Agentic</span>' : '') + (k.added && k.added !== '2.0' ? '<span class="tag tag-chg">New</span>' : '') + '</span></button></li>';
   }
   function viewCons() {
     return '<div class="view"><p class="view-intro">Rules the chatbot complies with or not. They have no maturity of their own; each one names its source, the capabilities that enforce it and how to check it. The register is maintained under 1.4 AI conduct management.</p>' +

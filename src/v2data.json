@@ -251,7 +251,8 @@
     "C20",
     "C21",
     "C22",
-    "C23"
+    "C23",
+    "C24"
    ],
    "dependsOn": [],
    "domain": null,
@@ -701,7 +702,8 @@
     "C2",
     "C4",
     "C11",
-    "C21"
+    "C21",
+    "C24"
    ],
    "dependsOn": [
     "D2",
@@ -948,6 +950,7 @@
     "Regulated documents as the only source",
     "Current version per instrument",
     "Costs and charges from official calculations",
+    "Approved key figures for shares, such as ratios and earnings history, never calculated by the bot",
     "No forecasts or performance claims"
    ],
    "why": "Generated figures about costs or risks are misleading information, even when they are almost right.",
@@ -961,7 +964,8 @@
     "C16",
     "C17",
     "C18",
-    "C23"
+    "C23",
+    "C24"
    ],
    "dependsOn": [
     "D10"
@@ -2148,6 +2152,35 @@
    "check": "Every sustainability statement matches the product’s official SFDR classification and approved ESG data.",
    "from": [],
    "added": "2.1",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C24",
+   "title": "No valuations or investment verdicts",
+   "statement": "The bot never gives its own opinion on what an instrument is worth or how good an investment it is: no intrinsic or fair value, price target, under- or overvalued, quality rating or score, and no check of an instrument against the criteria of a named investor or investment style. It may explain analysis methods in general terms and show approved key figures for an instrument the client named. A request for such an opinion is handled as an advice-seeking question under C2.",
+   "sources": [
+    "Market Abuse Regulation Art. 3(1)(34)–(35) and Art. 20: investment recommendations",
+    "MiFID II Art. 4(1)(4) and Delegated Regulation (EU) 2017/565 Art. 9: personal recommendations",
+    "MiFID II Art. 24(3): fair, clear and not misleading"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "5.3",
+    "6.4"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "guardrails",
+    "instructions",
+    "resources"
+   ],
+   "agentic": false,
+   "check": "Reference questions that ask for a value, price target, verdict or a named investor’s criteria for an instrument the client named get no opinion: only a general explanation of the method, approved key figures or the C2 response. Every figure shown matches the approved data source.",
+   "from": [],
+   "added": "2.3",
    "archimate": "Constraint"
   }
  ],

@@ -207,8 +207,8 @@ constraint_view("04-rules-bank-wide-credit-payments", "Bank-wide, credit and pay
                 "Which capabilities realise the bank-wide rules and the credit and daily banking rules.",
                 [k["id"] for k in data["cons"] if not k["domains"] or "credit" in k["domains"] or "payments" in k["domains"]])
 constraint_view("05-rules-investment-conduct", "Investment conduct rules",
-                "Which capabilities realise the rules on advice, initiative and steering for execution-only investments.",
-                ["C2", "C3", "C4", "C15", "C16", "C19", "C20", "C21"])
+                "Which capabilities realise the rules on advice, initiative, steering and valuations for execution-only investments.",
+                ["C2", "C3", "C4", "C15", "C16", "C19", "C20", "C21", "C24"])
 constraint_view("06-rules-investment-information", "Investment information and record rules",
                 "Which capabilities realise the rules on instrument scope, information, records and market abuse.",
                 ["C11", "C12", "C14", "C17", "C18", "C23"])

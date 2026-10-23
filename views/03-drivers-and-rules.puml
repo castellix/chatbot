@@ -41,6 +41,7 @@ Grouping(grpRules, "Requirements and constraints") {
   Motivation_Constraint(c21, "C21 No coaching on the appropriateness test")
   Motivation_Constraint(c22, "C22 No tax advice")
   Motivation_Constraint(c23, "C23 Sustainability claims from official disclosures only")
+  Motivation_Constraint(c24, "C24 No valuations or investment verdicts")
 }
 
 Rel_Influence(drvAiAct, c1)
@@ -70,4 +71,6 @@ Rel_Influence(drvMar, c20)
 Rel_Influence(drvMifid, c21)
 Rel_Influence(drvPolicy, c22)
 Rel_Influence(drvSfdr, c23)
+Rel_Influence(drvMifid, c24)
+Rel_Influence(drvMar, c24)
 @enduml

@@ -1,6 +1,6 @@
 # AI Chatbot Capability Model
 
-A business capability model for a bank-wide AI chatbot covering daily banking, credit and execution-only investments. Version 2.2.
+A business capability model for a bank-wide AI chatbot covering daily banking, credit and execution-only investments. Version 2.3.
 
 Open [`ai-chatbot-capability-model.html`](ai-chatbot-capability-model.html) in a browser. It is a single self-contained file with no external dependencies.
 
@@ -10,7 +10,7 @@ Open [`ai-chatbot-capability-model.html`](ai-chatbot-capability-model.html) in a
 |---|---|---|
 | Capabilities | 34 (8 Level 1) | What the chatbot itself must be able to do. Each has an owner and a maturity. |
 | Enterprise dependencies | 16 | Capabilities the bank already has for every channel. The chatbot uses them as they are or needs them extended. |
-| Constraints | 23 | Rules the chatbot complies with or not, each with a source, the capabilities that enforce it, and how to check it. |
+| Constraints | 24 | Rules the chatbot complies with or not, each with a source, the capabilities that enforce it, and how to check it. |
 | From version 1 | 60 rows | Where each capability of the first map went. |
 
 ## ArchiMate views
