@@ -1,0 +1,73 @@
+@startuml
+!include <archimate/Archimate>
+title AI chatbot capability model – drivers and rules
+left to right direction
+' Drivers influence the rules. Requirements oblige the chatbot to do something;
+' constraints restrict what it may do.
+
+Grouping(grpDrivers, "Drivers") {
+  Motivation_Driver(drvMifid, "MiFID II")
+  Motivation_Driver(drvAiAct, "EU AI Act")
+  Motivation_Driver(drvGdpr, "GDPR")
+  Motivation_Driver(drvPsd2, "PSD2")
+  Motivation_Driver(drvCredit, "Consumer and mortgage credit rules")
+  Motivation_Driver(drvMar, "Market Abuse Regulation")
+  Motivation_Driver(drvPriips, "PRIIPs Regulation")
+  Motivation_Driver(drvSfdr, "SFDR and ESMA fund-name guidelines")
+  Motivation_Driver(drvComplaints, "ESMA and EBA complaints guidelines")
+  Motivation_Driver(drvPolicy, "Bank policy")
+}
+Grouping(grpRules, "Requirements and constraints") {
+  Motivation_Requirement(c1, "C1 AI disclosure")
+  Motivation_Constraint(c2, "C2 No personal recommendations")
+  Motivation_Constraint(c3, "C3 Client initiative only")
+  Motivation_Constraint(c4, "C4 No steering combinations")
+  Motivation_Constraint(c5, "C5 No creditworthiness assessment")
+  Motivation_Constraint(c6, "C6 Responsible credit information")
+  Motivation_Requirement(c7, "C7 Payment authorisation")
+  Motivation_Requirement(c8, "C8 Scam warning before payment")
+  Motivation_Constraint(c9, "C9 Data minimisation")
+  Motivation_Constraint(c10, "C10 Purpose limitation across domains")
+  Motivation_Constraint(c11, "C11 Execution-only instrument scope")
+  Motivation_Requirement(c12, "C12 Recording of order-related communication")
+  Motivation_Requirement(c13, "C13 Complaints in chat are complaints")
+  Motivation_Constraint(c14, "C14 No tipping off")
+  Motivation_Requirement(c15, "C15 Execution-only notice")
+  Motivation_Constraint(c16, "C16 Neutral presentation")
+  Motivation_Requirement(c17, "C17 Costs and KID before the order")
+  Motivation_Requirement(c18, "C18 Performance shown by the rules")
+  Motivation_Constraint(c19, "C19 No forecasts or promises")
+  Motivation_Constraint(c20, "C20 No market commentary of its own")
+  Motivation_Constraint(c21, "C21 No coaching on the appropriateness test")
+  Motivation_Constraint(c22, "C22 No tax advice")
+  Motivation_Constraint(c23, "C23 Sustainability claims from official disclosures only")
+}
+
+Rel_Influence(drvAiAct, c1)
+Rel_Influence(drvMifid, c2)
+Rel_Influence(drvCredit, c2)
+Rel_Influence(drvMifid, c3)
+Rel_Influence(drvMifid, c4)
+Rel_Influence(drvAiAct, c5)
+Rel_Influence(drvCredit, c5)
+Rel_Influence(drvCredit, c6)
+Rel_Influence(drvPsd2, c7)
+Rel_Influence(drvPolicy, c8)
+Rel_Influence(drvGdpr, c9)
+Rel_Influence(drvGdpr, c10)
+Rel_Influence(drvMifid, c11)
+Rel_Influence(drvMifid, c12)
+Rel_Influence(drvComplaints, c13)
+Rel_Influence(drvMar, c14)
+Rel_Influence(drvMifid, c15)
+Rel_Influence(drvMifid, c16)
+Rel_Influence(drvMifid, c17)
+Rel_Influence(drvPriips, c17)
+Rel_Influence(drvMifid, c18)
+Rel_Influence(drvMifid, c19)
+Rel_Influence(drvMifid, c20)
+Rel_Influence(drvMar, c20)
+Rel_Influence(drvMifid, c21)
+Rel_Influence(drvPolicy, c22)
+Rel_Influence(drvSfdr, c23)
+@enduml

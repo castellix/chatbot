@@ -1,0 +1,55 @@
+@startuml
+!include <archimate/Archimate>
+title AI chatbot capability model – investment conduct rules
+left to right direction
+' Capabilities realise the rules. A rule that relies on an enterprise capability
+' is realised by the chatbot and that enterprise capability together.
+
+Grouping(grpChatbot, "AI chatbot capabilities") {
+  Strategy_Capability(cap1_4, "1.4 AI conduct management")
+  Strategy_Capability(cap2_1, "2.1 Outcome KPI management")
+  Strategy_Capability(cap5_2, "5.2 Conversation context management")
+  Strategy_Capability(cap5_3, "5.3 Conversation handling")
+  Strategy_Capability(cap5_4, "5.4 Bot–human co-handling")
+  Strategy_Capability(cap6_1, "6.1 Authoritative knowledge curation")
+  Strategy_Capability(cap6_3, "6.3 Approved-answer management")
+  Strategy_Capability(cap6_4, "6.4 Regulated instrument information")
+}
+Grouping(grpRules, "Investment conduct rules") {
+  Motivation_Constraint(c2, "C2 No personal recommendations")
+  Motivation_Constraint(c3, "C3 Client initiative only")
+  Motivation_Constraint(c4, "C4 No steering combinations")
+  Motivation_Requirement(c15, "C15 Execution-only notice")
+  Motivation_Constraint(c16, "C16 Neutral presentation")
+  Motivation_Constraint(c19, "C19 No forecasts or promises")
+  Motivation_Constraint(c20, "C20 No market commentary of its own")
+  Motivation_Constraint(c21, "C21 No coaching on the appropriateness test")
+}
+Grouping(grpEnterprise, "Enterprise capabilities") {
+  Strategy_Capability(d10, "D10 Appropriateness assessment & instrument classification")
+  Strategy_Capability(d11, "D11 Securities order management")
+  Strategy_Capability(d16, "D16 Advisory services")
+}
+
+Rel_Realization(cap1_4, c2)
+Rel_Realization(cap5_3, c2)
+Rel_Realization(cap5_4, c2)
+Rel_Realization(cap1_4, c3)
+Rel_Realization(cap2_1, c3)
+Rel_Realization(cap5_2, c3)
+Rel_Realization(cap1_4, c4)
+Rel_Realization(cap5_3, c4)
+Rel_Realization(cap1_4, c15)
+Rel_Realization(cap6_3, c15)
+Rel_Realization(cap1_4, c16)
+Rel_Realization(cap6_4, c16)
+Rel_Realization(cap1_4, c19)
+Rel_Realization(cap1_4, c20)
+Rel_Realization(cap6_1, c20)
+Rel_Realization(cap1_4, c21)
+Rel_Realization(cap5_3, c21)
+Rel_Realization(d16, c2)
+Rel_Realization(d11, c3)
+Rel_Realization(d11, c15)
+Rel_Realization(d10, c21)
+@enduml

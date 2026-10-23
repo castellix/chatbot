@@ -1,0 +1,2902 @@
+{
+ "bands": [
+  {
+   "key": "steer",
+   "name": "Steer & Govern",
+   "desc": "Direction, accountability and value",
+   "l1": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  {
+   "key": "serve",
+   "name": "Serve",
+   "desc": "The customer-facing core",
+   "l1": [
+    "4",
+    "5",
+    "6"
+   ]
+  },
+  {
+   "key": "assure",
+   "name": "Assure & Operate",
+   "desc": "Quality and run",
+   "l1": [
+    "7",
+    "8"
+   ]
+  }
+ ],
+ "l1": [
+  {
+   "id": "1",
+   "from": "1",
+   "name": "AI Governance & Risk Management",
+   "owner": "AI governance office, with CRO oversight",
+   "purpose": "Sets the conditions under which the AI may act on the bank’s behalf and keeps the bank accountable for what it does: the inventory and risk classification of AI use cases, named ownership, model risk, the conduct framework and its constraint register, the evidence trail behind every answer, and the AI literacy of the people involved.",
+   "band": "steer"
+  },
+  {
+   "id": "2",
+   "from": "2",
+   "name": "Performance & Value Management",
+   "owner": "business owner of the chatbot",
+   "purpose": "Shows whether the chatbot delivers what it was funded for: client questions actually resolved, lower cost to serve and a better client experience, at an acceptable cost and risk. It defines outcome measures that cannot be gamed, steers spend per journey and checks the business case after go-live.",
+   "band": "steer"
+  },
+  {
+   "id": "3",
+   "from": "3",
+   "name": "Continuous Improvement",
+   "owner": "product owner, with conversation design",
+   "purpose": "Turns what happens in real conversations into improvements in content, journeys, conduct rules and the product itself. It closes the loop between what clients ask, where the bot fails and who can fix it, so the chatbot improves through managed change rather than ad hoc prompt tweaks.",
+   "band": "steer"
+  },
+  {
+   "id": "4",
+   "from": "4",
+   "name": "Customer Interaction Management",
+   "owner": "digital channel business owner, with product-domain owners for their journeys",
+   "purpose": "Defines the front door of the chatbot: what it is for in each product domain, and in which language and tone, for everyone. Channel management owns the single front door; daily banking, credit and investments each own their journeys behind it. Identifying the client relies on the bank’s authentication capability (D1).",
+   "band": "serve"
+  },
+  {
+   "id": "5",
+   "from": "5",
+   "name": "Conversation Management",
+   "owner": "contact-centre and conversation design lead",
+   "purpose": "Treats each conversation as a business object with a lifecycle, a context and an outcome. It covers what the bot carries and remembers, how it handles each part of what the client asks, how humans join in or approve, how each conversation ends, and the standards for how the bot talks.",
+   "band": "serve"
+  },
+  {
+   "id": "6",
+   "from": "6",
+   "name": "Knowledge & Content Management",
+   "owner": "content owners per product domain",
+   "purpose": "Provides the content the bot is allowed to rely on: authoritative, current, approved and owned. In an investment app this includes fee and tariff information, product and instrument documents and approved wording for sensitive topics. If the content is wrong or stale, the bot is wrong with full confidence.",
+   "band": "serve"
+  },
+  {
+   "id": "7",
+   "from": "9",
+   "name": "AI Quality Assurance",
+   "owner": "AI product team, with business owner sign-off",
+   "purpose": "Proves, before and after release, that the chatbot performs to an agreed standard. The business defines what “good” means per journey and owns the reference answers, evidence decides every release, and quality is monitored on real conversations after go-live.",
+   "band": "assure"
+  },
+  {
+   "id": "8",
+   "from": "10",
+   "name": "AI Operations & Incident Management",
+   "owner": "IT service management, with the business owner",
+   "purpose": "Keeps the chatbot running reliably and responds when it fails. AI incidents differ from classic outages: the service can be up while it gives wrong answers at scale. This covers detection, containment and classification of such incidents, and fallback when a model or provider is unavailable.",
+   "band": "assure"
+  }
+ ],
+ "caps": [
+  {
+   "id": "1.1",
+   "l1": "1",
+   "name": "AI use-case inventory & risk classification",
+   "from": [
+    "1.1"
+   ],
+   "change": "kept",
+   "summary": "Keeps a complete register of every AI use case in the chatbot, from simple FAQ answers to order capture, and classifies each one against the EU AI Act and the bank’s internal risk taxonomy. The register is the starting point for ownership, controls, validation and audit.",
+   "includes": [
+    "A register entry per use case: purpose, journeys, data, model and owner",
+    "Classification under the AI Act and the internal risk tiers",
+    "Reclassification when scope, data or autonomy changes",
+    "A link from each use case to its controls and approvals"
+   ],
+   "why": "Controls can only be proportionate when the risk of each use case is known. In a bank-wide chatbot the same assistant can be limited-risk in daily banking and high-risk the moment it touches credit scoring, so classification is per use case, not per bot.",
+   "example": "The order-status assistant is registered as limited risk; a proposed portfolio-nudging feature is stopped as incompatible with execution-only.",
+   "regs": [
+    "EU AI Act risk categories"
+   ],
+   "l3": [],
+   "enforces": [
+    "C5"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "1.2",
+   "l1": "1",
+   "name": "AI accountability & ownership",
+   "from": [
+    "1.2"
+   ],
+   "change": "kept",
+   "summary": "Assigns a named business owner to every bot and every use case, and makes clear who is responsible, accountable, consulted and informed across business, IT, compliance, risk and data owners. Accountability stays with the business, even when IT or a vendor built the AI.",
+   "includes": [
+    "A named business owner per bot and per use case",
+    "A RACI across first line, second line and IT",
+    "Decision rights for scope, conduct and release",
+    "Ownership hand-over when people or teams change"
+   ],
+   "why": "Without an owner, nobody decides the trade-off between helpfulness and risk, and problems bounce between teams.",
+   "example": "The head of the investment app owns the order and portfolio journeys; compliance is consulted, not accountable.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "1.3",
+   "l1": "1",
+   "name": "Model risk management",
+   "from": [
+    "1.3"
+   ],
+   "change": "kept",
+   "summary": "Brings the models behind the chatbot under the bank’s model risk framework: initial validation, approval for use, performance monitoring and periodic or event-driven revalidation. This applies to external foundation models as well as to classifier models used in guardrails.",
+   "includes": [
+    "Validation of fitness for purpose per use case",
+    "Approval and conditions of use",
+    "Revalidation when the provider releases a new model version",
+    "Documented model limitations for owners and users"
+   ],
+   "why": "Foundation models change underneath you. A provider update can alter behaviour overnight, so validation must be repeatable and triggered by change.",
+   "example": "A new model version from the provider triggers revalidation before it may serve customers.",
+   "regs": [
+    "The bank’s model risk management framework"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [
+    "D13"
+   ],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "1.4",
+   "l1": "1",
+   "name": "AI conduct management",
+   "from": [
+    "1.4"
+   ],
+   "change": "kept",
+   "summary": "Defines, authorises, supervises and corrects what the AI may say and do on the bank’s behalf. It is the conduct framework for a new kind of agent, and it owns the constraint register: every rule the chatbot must respect, with its source and the capability that enforces it. Guardrails are its technical realisation.",
+   "includes": [
+    "A conduct policy: what the AI may say, claim or promise",
+    "Mandates: what the AI may do, within which limits and confirmations",
+    "Risk appetite per journey: over-refusal versus wrong answers",
+    "Supervision, breach remediation and exceptions"
+   ],
+   "why": "Without an explicit conduct policy, the boundaries of the bot are set by whoever writes the prompt. In an execution-only app, a single unsolicited suggestion can undermine the regime.",
+   "example": "The bot never forecasts a price or calls an instrument a good buy; it may show order status but never cancels an order unconfirmed.",
+   "regs": [
+    "MiFID II conduct of business rules",
+    "The bank’s conduct risk framework"
+   ],
+   "l3": [
+    [
+     "Conduct policy definition",
+     "What the AI may say, claim or promise, and what is off-limits"
+    ],
+    [
+     "Conduct requirements intake",
+     "Turn regulatory, legal, product and brand needs into rules"
+    ],
+    [
+     "Constraint register maintenance",
+     "Keep the register of constraints current, each with a source, an owner and a check"
+    ],
+    [
+     "AI risk appetite setting",
+     "Per journey, balance over-refusal against wrong answers"
+    ],
+    [
+     "Mandate & authority management",
+     "What the AI may see and do, within which limits and confirmations"
+    ],
+    [
+     "Conduct supervision",
+     "Continuously verify behaviour and detect breaches"
+    ],
+    [
+     "Conduct breach & remediation",
+     "Redress clients, find root cause and update policy"
+    ],
+    [
+     "Conduct exception management",
+     "Approve cases where a boundary blocks a legitimate need"
+    ]
+   ],
+   "enforces": [
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C10",
+    "C14",
+    "C15",
+    "C16",
+    "C19",
+    "C20",
+    "C21",
+    "C22",
+    "C23"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "guardrails"
+   ],
+   "around": null
+  },
+  {
+   "id": "1.5",
+   "l1": "1",
+   "name": "AI traceability & audit trail",
+   "from": [
+    "1.6"
+   ],
+   "change": "renumbered",
+   "summary": "Records how the AI reached each answer or action: model and configuration version, instructions, retrieved sources, guardrail interventions, tool calls, approvals, and who changed what in the setup. It lets the bank reconstruct and explain any conversation after the fact.",
+   "includes": [
+    "Versioning of models, instructions, prompts and content",
+    "Logging of sources, tool calls and guardrail decisions",
+    "A change log of configuration and conduct rules",
+    "Retrieval of the full trail for audit, disputes and incidents"
+   ],
+   "why": "When a client disputes an answer or a supervisor asks why the bot said something, the bank must show evidence, not reconstruct its reasoning afterwards.",
+   "example": "Showing which model version, KID version and conduct rules produced a client’s answer about a fund’s costs.",
+   "regs": [
+    "DORA: logging requirements",
+    "EU AI Act record keeping, if a use case ever becomes high-risk"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [
+    "D5",
+    "D12"
+   ],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "1.6",
+   "l1": "1",
+   "name": "AI literacy & competence",
+   "from": [
+    "7.6"
+   ],
+   "change": "moved",
+   "summary": "Ensures that staff who build, operate, oversee or receive handoffs from the AI understand how it works, where it fails and what their own role is.",
+   "includes": [
+    "Role-based training",
+    "Awareness of limitations and failure modes",
+    "Training for reviewers and agents",
+    "Records of who was trained"
+   ],
+   "why": "AI literacy is a legal obligation and the precondition for meaningful human oversight.",
+   "example": "Training for content owners, reviewers and agents who receive handoffs.",
+   "regs": [
+    "EU AI Act Art. 4"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "2.1",
+   "l1": "2",
+   "name": "Outcome KPI management",
+   "from": [
+    "2.1"
+   ],
+   "change": "kept",
+   "summary": "Defines and tracks KPIs based on outcomes for the client and the bank: questions actually resolved, satisfaction, escalation, and false containment, where clients give up without being helped. In execution-only the KPI set must never reward order conversion.",
+   "includes": [
+    "Resolution defined per journey and verified against repeat contacts",
+    "Satisfaction and effort measures",
+    "Escalation and false-containment rates",
+    "Explicit exclusion of order-conversion targets"
+   ],
+   "why": "Volume and containment metrics flatter the bot. Outcome metrics show whether clients were helped, and the wrong incentive can push the bot toward solicitation.",
+   "example": "Orders placed after a chat are monitored, but never set as a target for the bot: that would undermine client initiative.",
+   "regs": [
+    "MiFID II conflicts-of-interest rules"
+   ],
+   "l3": [],
+   "enforces": [
+    "C3"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Observability platform"
+  },
+  {
+   "id": "2.2",
+   "l1": "2",
+   "name": "Consumption & cost management",
+   "from": [
+    "2.2"
+   ],
+   "change": "kept",
+   "summary": "Tracks and steers what the chatbot costs per conversation and per journey: model tokens, retrieval, platform and human handling. It allocates costs to business lines and sets budgets and limits, so expensive journeys are redesigned rather than tolerated.",
+   "includes": [
+    "Cost per conversation and per journey",
+    "Budgets, limits and alerts",
+    "Chargeback to business lines",
+    "Cost input for design choices such as model size"
+   ],
+   "why": "AI costs scale with usage and with design choices. Without visibility, a single long-context journey can dominate the bill.",
+   "example": "The fund-cost journey turns out to cost several times the average because of long document retrieval, and is redesigned.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "2.3",
+   "l1": "2",
+   "name": "Benefits realisation",
+   "from": [
+    "2.3"
+   ],
+   "change": "kept",
+   "summary": "Compares the business case with what actually happened after go-live: deflected calls, handling time, client satisfaction, and new risks or costs. It feeds the decision to extend, redesign or stop journeys.",
+   "includes": [
+    "A baseline before go-live",
+    "Benefit tracking at fixed intervals",
+    "Attribution of effects to the chatbot versus other changes",
+    "A formal review with the business owner"
+   ],
+   "why": "Without a baseline and a review, a chatbot can run for years without anyone knowing whether it pays off.",
+   "example": "Planned deflection of order-status calls compared with actual contact-centre volumes six months after go-live.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "3.1",
+   "l1": "3",
+   "name": "Feedback capture & triage",
+   "from": [
+    "3.1"
+   ],
+   "change": "kept",
+   "summary": "Collects feedback from clients, from agents who receive handoffs and from quality reviewers, and routes each item to the owner who can fix it: content, conversation design, conduct or technology.",
+   "includes": [
+    "Client feedback in the conversation",
+    "Agent feedback after a handoff",
+    "Reviewer findings from quality sampling",
+    "Triage and routing to owners with a deadline"
+   ],
+   "why": "Agents see the bot’s mistakes every day. If their feedback has no route, the same error reaches the next hundred clients.",
+   "example": "An agent flags that the bot quoted an outdated custody fee; the item goes to the tariff content owner.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Channel user interface"
+  },
+  {
+   "id": "3.2",
+   "l1": "3",
+   "name": "Gap analysis",
+   "from": [
+    "3.2"
+   ],
+   "change": "kept",
+   "summary": "Analyses unanswered, misrouted, abandoned and out-of-scope conversations to find needs the bot does not yet cover, or covers badly, and turns them into a prioritised backlog.",
+   "includes": [
+    "Analysis of unanswered and declined questions",
+    "Patterns in abandonment and repeated reformulation",
+    "Review of out-of-scope requests for real needs",
+    "A prioritised backlog with expected value"
+   ],
+   "why": "Out of scope is a decision, not a fact. Recurring declined questions can reveal a real need the business has not yet scoped.",
+   "example": "A spike in unanswered questions about a newly listed ETF range creates a content backlog item.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "3.3",
+   "l1": "3",
+   "name": "Customer insight",
+   "from": [
+    "3.3"
+   ],
+   "change": "kept",
+   "summary": "Turns conversations into insight for product and process owners: what confuses clients, which fees or processes generate questions, and where the app itself needs fixing rather than the bot.",
+   "includes": [
+    "Thematic analysis of conversation topics",
+    "Periodic insight reports to product owners",
+    "Signals of confusing products, fees or processes",
+    "Tracking whether insights led to changes"
+   ],
+   "why": "Many questions are symptoms of an unclear product or process. Fixing the cause is cheaper than answering the same question forever. Insight is never used to target clients with offers.",
+   "example": "Recurring confusion about the FX fee on foreign stock orders is reported to the product manager.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C10"
+   ],
+   "dependsOn": [
+    "D3"
+   ],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "4.1",
+   "l1": "4",
+   "name": "Journey & scope management",
+   "from": [
+    "4.1"
+   ],
+   "change": "kept",
+   "summary": "Decides which journeys and topics the bot resolves, which it only triages and which it must decline, per product domain. Channel management owns the single front door; daily banking, credit and investments each own their journeys behind it. Anything not listed is out of scope by default, and every tool and resource must trace back to an in-scope journey.",
+   "includes": [
+    "A scope matrix of journeys per domain, each marked resolve, triage or decline",
+    "A named owner per domain for its journeys",
+    "Default decline behaviour for everything else",
+    "Traceability from tools and resources to journeys"
+   ],
+   "why": "A positive list per domain is easier to govern than a list of forbidden topics, and it limits what the bot can reach. Federated ownership lets each domain extend its journeys without a second chatbot.",
+   "example": "Card blocking and order status are resolved; loan questions are triaged to a credit advisor; “What food suits my dog?” gets a polite decline.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C5",
+    "C11"
+   ],
+   "dependsOn": [
+    "D1",
+    "D10",
+    "D14",
+    "D16"
+   ],
+   "domain": null,
+   "blocks": [
+    "instructions",
+    "guardrails"
+   ],
+   "around": null
+  },
+  {
+   "id": "4.2",
+   "l1": "4",
+   "name": "Multilingual & brand voice management",
+   "from": [
+    "4.3"
+   ],
+   "change": "renumbered",
+   "summary": "Keeps answers and tone consistent across languages and channels, so a client gets the same answer in Dutch, French or English and recognises the bank’s voice in the bot, the app and the contact centre.",
+   "includes": [
+    "Supported languages and switching rules",
+    "Consistency of answers across languages",
+    "Tone of voice and form of address",
+    "Alignment with the wording of other channels"
+   ],
+   "why": "Answers that differ between languages are both a client experience problem and a conduct risk.",
+   "example": "The same custody fee answer in Dutch, French and English, in the house register.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C1"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "instructions",
+    "prompts"
+   ],
+   "around": null
+  },
+  {
+   "id": "4.3",
+   "l1": "4",
+   "name": "Accessibility & inclusion",
+   "from": [
+    "4.4"
+   ],
+   "change": "renumbered",
+   "summary": "Makes the chatbot usable for clients with disabilities, low digital literacy or limited language skills, and always offers an alternative route to a human.",
+   "includes": [
+    "Screen-reader and keyboard support",
+    "Plain-language answers",
+    "Alternative contact routes",
+    "Testing with diverse users"
+   ],
+   "why": "Accessibility of banking services is a legal requirement in the EU, and the clients who struggle most with the app are often the ones who need help most.",
+   "example": "Screen-reader support and plain-language answers, in line with the European Accessibility Act.",
+   "regs": [
+    "European Accessibility Act"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Channel user interface"
+  },
+  {
+   "id": "5.1",
+   "l1": "5",
+   "name": "Conversation lifecycle management",
+   "from": [
+    "5.1"
+   ],
+   "change": "kept",
+   "summary": "Defines the states a conversation goes through, from opened to active, waiting, escalated, resolved, abandoned and closed, and what “resolved” means for each journey. It makes conversations measurable and manageable.",
+   "includes": [
+    "A state model for conversations",
+    "A definition of resolved per journey",
+    "Rules for timeouts and closure",
+    "Lifecycle events available to other processes"
+   ],
+   "why": "Without a lifecycle, every metric and every handoff is guesswork.",
+   "example": "An order-status conversation is resolved only once the client has the confirmed execution status.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "5.2",
+   "l1": "5",
+   "name": "Conversation context management",
+   "from": [
+    "5.2",
+    "5.3",
+    "5.4"
+   ],
+   "change": "merged",
+   "summary": "Decides and manages the context a conversation carries: within a session, across sessions and channels, and between conversations. It sets the policies for how long context stays valid and what the bot may remember about a client, with consent and a right to forget.",
+   "includes": [
+    "Context continuity across turns, sessions and channels",
+    "Resumption and expiry policy per journey",
+    "Cross-conversation memory policy, with consent and a right to forget",
+    "Separation of context between product domains"
+   ],
+   "why": "Context makes the bot helpful, but stale context gives wrong answers and remembered context can drift into profiling or solicitation. The policies are the business decision; continuity is how they are applied.",
+   "example": "A client asks about a pending order and calls an hour later: the agent sees the conversation. A week later the bot still knows the client’s preferred language, but not which instrument they asked about.",
+   "regs": [
+    "GDPR: storage limitation and purpose limitation"
+   ],
+   "l3": [
+    [
+     "Context continuity",
+     "Context preserved across turns, sessions and channels (was 5.2)"
+    ],
+    [
+     "Resumption & expiry policy",
+     "When a conversation can be resumed and when its context expires (was 5.3)"
+    ],
+    [
+     "Cross-conversation memory policy",
+     "What the bot may remember between conversations, with consent and a right to forget (was 5.4)"
+    ]
+   ],
+   "enforces": [
+    "C3",
+    "C9",
+    "C10"
+   ],
+   "dependsOn": [
+    "D2",
+    "D3",
+    "D4"
+   ],
+   "domain": null,
+   "blocks": [
+    "memory"
+   ],
+   "around": null
+  },
+  {
+   "id": "5.3",
+   "l1": "5",
+   "name": "Conversation handling",
+   "from": [
+    "4.5",
+    "5.5",
+    "5.6",
+    "5.7",
+    "5.10"
+   ],
+   "change": "merged",
+   "summary": "Handles the conversation itself, so that each part of what the client asks reaches the right outcome under the right rules. It recognises the domain and journey of each turn, asks instead of assuming, tracks several questions separately, recovers when the conversation goes wrong, and links the conversation to the cases, orders and transactions it concerns.",
+   "includes": [
+    "Routing per turn: domain, then journey and question type",
+    "Asking instead of assuming",
+    "Tracking each question to its own outcome",
+    "Recovering before the client gives up",
+    "Linking the conversation to cases, orders and transactions"
+   ],
+   "why": "These are the moments where chatbots usually fail: the wrong rules for the topic, a wrong assumption, a forgotten second question, a loop. Each is a skill of the conversation rather than a separate ability of the bank, so they are managed together, with one owner.",
+   "example": "“Block my card, and when is my dividend paid?” is split into two parts, each handled under its own rules and tracked to its own outcome. When the client has to rephrase twice, the bot offers a human.",
+   "regs": [],
+   "l3": [
+    [
+     "Domain & regime routing",
+     "Recognise the domain of each turn and apply its conduct rules (was 4.5)"
+    ],
+    [
+     "Clarification & disambiguation",
+     "Ask which account, order or instrument instead of assuming (was 5.5)"
+    ],
+    [
+     "Multi-intent tracking",
+     "Track each question in a conversation to its own outcome (was 5.6)"
+    ],
+    [
+     "Conversation recovery",
+     "Detect loops and frustration, and change course before the client gives up (was 5.7)"
+    ],
+    [
+     "Interaction linkage",
+     "Link the conversation to cases, complaints, orders and transactions (was 5.10)"
+    ]
+   ],
+   "enforces": [
+    "C2",
+    "C4",
+    "C11",
+    "C21"
+   ],
+   "dependsOn": [
+    "D2",
+    "D6",
+    "D8",
+    "D9"
+   ],
+   "domain": null,
+   "blocks": [
+    "instructions",
+    "memory",
+    "loop",
+    "tools",
+    "guardrails"
+   ],
+   "around": null
+  },
+  {
+   "id": "5.4",
+   "l1": "5",
+   "name": "Bot–human co-handling",
+   "from": [
+    "5.8"
+   ],
+   "change": "renumbered",
+   "summary": "Treats bot and human as participants in one conversation: a warm handover with full context, joint handling, and hand-back to the bot for routine follow-up.",
+   "includes": [
+    "Handover triggers and routing",
+    "Context and the bot’s reasoning trail for the agent",
+    "Hand-back to the bot",
+    "Service levels and opening hours"
+   ],
+   "why": "A cold handover wastes the agent’s time and the client’s patience. Without hand-back, expensive agents end up doing routine work.",
+   "example": "An agent resolves a disputed execution price, then hands back to the bot to send the confirmation.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C2",
+    "C13"
+   ],
+   "dependsOn": [
+    "D7",
+    "D16"
+   ],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "5.5",
+   "l1": "5",
+   "name": "Human review & approval",
+   "from": [
+    "5.12"
+   ],
+   "change": "renumbered",
+   "summary": "Lets a human check, correct or approve an AI answer or action before it reaches the client or executes, without taking over the conversation. It needs reviewer staffing, review queues, turnaround times and four-eyes rules.",
+   "includes": [
+    "Review triggers set by the conduct policy",
+    "Review queues and turnaround times",
+    "Approve, edit or reject decisions",
+    "Four-eyes rules for high-impact actions"
+   ],
+   "why": "Some answers and actions are too sensitive to leave to the AI alone, and a policy that requires review is useless without people staffed to do it.",
+   "example": "A request to cancel a partly executed order waits for back-office approval before anything changes.",
+   "regs": [
+    "EU AI Act human oversight, if a use case ever becomes high-risk"
+   ],
+   "l3": [],
+   "enforces": [
+    "C7"
+   ],
+   "dependsOn": [
+    "D11",
+    "D15"
+   ],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "5.6",
+   "l1": "5",
+   "name": "Outcome disposition",
+   "from": [
+    "5.9"
+   ],
+   "change": "renumbered",
+   "summary": "Classifies every conversation’s outcome, like contact-centre wrap-up codes: resolved, handed off, abandoned, complaint, appropriateness referral. It makes outcomes countable and comparable.",
+   "includes": [
+    "An outcome code set per journey",
+    "Automatic and reviewed classification",
+    "Outcomes per intent",
+    "A feed into KPIs and insight"
+   ],
+   "why": "Without outcome codes, performance measurement is guesswork and complaints hide in the volume.",
+   "example": "Resolved, handed off, abandoned, complaint, appropriateness referral.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C13"
+   ],
+   "dependsOn": [
+    "D6"
+   ],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "5.7",
+   "l1": "5",
+   "name": "Conversation design governance",
+   "from": [
+    "5.11"
+   ],
+   "change": "renumbered",
+   "summary": "Sets and maintains the standards for how the bot talks: openings, closings, error handling, refusals and tone. Conversation designers own these standards, not prompt engineers.",
+   "includes": [
+    "Design standards and patterns",
+    "Refusal and decline patterns that always offer an alternative",
+    "Review of new journeys against the standards",
+    "Ownership of instruction and prompt wording"
+   ],
+   "why": "A refusal that leads nowhere frustrates clients. Consistent patterns make the bot predictable and testable.",
+   "example": "Every “I can’t help with that” offers an alternative route.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C1"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "6.1",
+   "l1": "6",
+   "name": "Authoritative knowledge curation",
+   "from": [
+    "6.1"
+   ],
+   "change": "kept",
+   "summary": "Names a content owner per domain and keeps one source of truth for what the bot may use, so every answer can be traced to owned, approved content.",
+   "includes": [
+    "Content owners per domain",
+    "One source of truth per topic",
+    "Approval of new content",
+    "Exclusion of unofficial sources"
+   ],
+   "why": "A bot that draws on unofficial or duplicate sources gives inconsistent answers with full confidence.",
+   "example": "The tariff team owns fee content; the bot never draws on an unofficial wiki or forum.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C6",
+    "C20",
+    "C22"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "resources"
+   ],
+   "around": null
+  },
+  {
+   "id": "6.2",
+   "l1": "6",
+   "name": "Content lifecycle management",
+   "from": [
+    "6.2"
+   ],
+   "change": "kept",
+   "summary": "Manages validity dates, review cycles and retirement of content, so outdated tariffs, conditions or procedures expire before they reach clients.",
+   "includes": [
+    "Validity dates on content",
+    "Periodic review cycles",
+    "Retirement and replacement",
+    "Alerts before content expires"
+   ],
+   "why": "Stale content is one of the most common causes of wrong answers and complaints.",
+   "example": "Tariff content expires on the date the new tariff list applies.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "resources"
+   ],
+   "around": null
+  },
+  {
+   "id": "6.3",
+   "l1": "6",
+   "name": "Approved-answer management",
+   "from": [
+    "6.3"
+   ],
+   "change": "kept",
+   "summary": "Maintains pre-approved wording for sensitive topics, used instead of free generation: legal statements, risk warnings, investor protection and complaint procedures.",
+   "includes": [
+    "An inventory of topics that need approved wording",
+    "Legal and compliance sign-off",
+    "Versioning and language variants",
+    "Use of approved text instead of generated text"
+   ],
+   "why": "For some topics a paraphrase is a legal risk; the exact wording matters.",
+   "example": "The investor protection scheme explanation always uses legally approved text.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C1",
+    "C6",
+    "C15",
+    "C17",
+    "C18"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [
+    "prompts"
+   ],
+   "around": null
+  },
+  {
+   "id": "6.4",
+   "l1": "6",
+   "name": "Regulated instrument information",
+   "from": [
+    "6.4"
+   ],
+   "change": "kept",
+   "summary": "Serves instrument information only from regulated sources: KID, prospectus, factsheet and ex-ante costs and charges, with version control. The bot never generates its own figures about instruments.",
+   "includes": [
+    "Regulated documents as the only source",
+    "Current version per instrument",
+    "Costs and charges from official calculations",
+    "No forecasts or performance claims"
+   ],
+   "why": "Generated figures about costs or risks are misleading information, even when they are almost right.",
+   "example": "Asked about a fund’s costs, the bot shows the figures from the current KID, never a generated estimate.",
+   "regs": [
+    "PRIIPs: key information document",
+    "MiFID II Art. 24: information and costs and charges"
+   ],
+   "l3": [],
+   "enforces": [
+    "C16",
+    "C17",
+    "C18",
+    "C23"
+   ],
+   "dependsOn": [
+    "D10"
+   ],
+   "domain": "investments",
+   "blocks": [
+    "resources"
+   ],
+   "around": null
+  },
+  {
+   "id": "7.1",
+   "l1": "7",
+   "name": "Quality standard definition",
+   "from": [
+    "9.1"
+   ],
+   "change": "renumbered",
+   "summary": "Defines per journey what a good answer is: correct, complete, compliant and in tone, with the thresholds for go-live and for alerts.",
+   "includes": [
+    "Quality dimensions per journey",
+    "Acceptance thresholds",
+    "Zero-tolerance criteria",
+    "Ownership by the business"
+   ],
+   "why": "Without an agreed standard, every release discussion becomes a matter of opinion.",
+   "example": "Cost answers must match the KID exactly; the wording may vary.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "People and process"
+  },
+  {
+   "id": "7.2",
+   "l1": "7",
+   "name": "Evaluation reference management",
+   "from": [
+    "9.2"
+   ],
+   "change": "renumbered",
+   "summary": "Maintains business-owned reference questions with approved answers per journey, kept current as products and tariffs change.",
+   "includes": [
+    "Reference questions per journey",
+    "Answers approved by content owners",
+    "Updates when content changes",
+    "Coverage of edge cases and refusals"
+   ],
+   "why": "Only the business knows the right answer. Tests built on developer assumptions test the wrong thing.",
+   "example": "The investment product team maintains the reference set for order and cost questions.",
+   "regs": [],
+   "l3": [],
+   "enforces": [
+    "C9"
+   ],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Evaluation tooling"
+  },
+  {
+   "id": "7.3",
+   "l1": "7",
+   "name": "Release decision management",
+   "from": [
+    "9.3"
+   ],
+   "change": "renumbered",
+   "summary": "Takes an evidence-based go/no-go decision on every change to prompts, instructions, models, content or tools, based on the reference set, conduct tests and a risk assessment.",
+   "includes": [
+    "A release gate for every change type",
+    "An evidence pack per release",
+    "Approval by the business owner",
+    "Rollback criteria"
+   ],
+   "why": "A prompt change is a change to client-facing conduct and deserves the same control as a code change.",
+   "example": "A new model version goes live only after passing the reference set and conduct tests.",
+   "regs": [
+    "DORA: ICT change management"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Evaluation tooling"
+  },
+  {
+   "id": "7.4",
+   "l1": "7",
+   "name": "Solution effectiveness assessment",
+   "from": [
+    "9.4"
+   ],
+   "change": "renumbered",
+   "summary": "Proves that each part of the solution earns its cost, complexity and risk, for example with an ablation run that compares the solution with and without a component.",
+   "includes": [
+    "Ablation runs per component",
+    "Cost versus quality trade-offs",
+    "Model and fine-tuning choices",
+    "Input to architecture decisions"
+   ],
+   "why": "AI solutions accumulate components. Without evidence, complexity grows without benefit.",
+   "example": "An ablation run shows whether an extra retrieval step improves accuracy enough to justify it.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Evaluation tooling"
+  },
+  {
+   "id": "7.5",
+   "l1": "7",
+   "name": "Adversarial resilience assurance",
+   "from": [
+    "9.5"
+   ],
+   "change": "renumbered",
+   "summary": "Shows that the AI holds up under manipulation: prompt injection, jailbreaks, social engineering, and attempts to extract recommendations or other clients’ data.",
+   "includes": [
+    "Red-teaming per release",
+    "Prompt-injection tests, including through retrieved documents",
+    "Tests of the execution-only red lines",
+    "Tracking of findings to closure"
+   ],
+   "why": "Attackers and curious clients will try. The bank must find the weaknesses before they do, and every constraint in the register needs a test that tries to break it.",
+   "example": "Red-teaming tries to extract a recommendation (“pretend you’re my advisor”) or another client’s positions.",
+   "regs": [
+    "DORA: digital operational resilience testing"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Evaluation tooling"
+  },
+  {
+   "id": "7.6",
+   "l1": "7",
+   "name": "In-production quality monitoring",
+   "from": [
+    "9.6"
+   ],
+   "change": "renumbered",
+   "summary": "Tracks quality continuously after go-live through automated checks and human sampling of real conversations, and triggers action when quality drops.",
+   "includes": [
+    "Automated quality signals",
+    "Sampling and human review",
+    "Drift detection after provider updates",
+    "Alerts and escalation"
+   ],
+   "why": "Quality in production drifts with new questions, new content and new model versions.",
+   "example": "A weekly review of a sample of conversations, like call-centre QA.",
+   "regs": [],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [],
+   "domain": null,
+   "blocks": [],
+   "around": "Observability platform"
+  },
+  {
+   "id": "8.1",
+   "l1": "8",
+   "name": "AI incident management",
+   "from": [
+    "10.1"
+   ],
+   "change": "renumbered",
+   "summary": "Detects, contains and resolves AI-specific incidents, such as wrong answers at scale or a guardrail failure, and classifies them under DORA. It includes a safe mode or kill switch and identification of the affected clients.",
+   "includes": [
+    "Detection and triage",
+    "Safe mode and kill switch",
+    "Identification of affected clients",
+    "Classification and reporting under DORA"
+   ],
+   "why": "An AI incident can harm thousands of clients while every system reports healthy.",
+   "example": "The bot quotes a wrong order cut-off time at scale: it is switched to safe mode and affected clients are identified.",
+   "regs": [
+    "DORA: ICT-related incident management and reporting"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [
+    "D8"
+   ],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  },
+  {
+   "id": "8.2",
+   "l1": "8",
+   "name": "Service continuity",
+   "from": [
+    "10.2"
+   ],
+   "change": "renumbered",
+   "summary": "Defines fallback behaviour when the model, the provider or another dependency is unavailable or degraded, so clients keep a working channel.",
+   "includes": [
+    "Fallback flows and contact routes",
+    "An alternative model or provider where justified",
+    "Messaging in degraded mode",
+    "Continuity testing"
+   ],
+   "why": "Dependence on one external model is a single point of failure for a client channel.",
+   "example": "During a provider outage, the bot falls back to guided flows and order-desk contact options.",
+   "regs": [
+    "DORA: business continuity"
+   ],
+   "l3": [],
+   "enforces": [],
+   "dependsOn": [
+    "D13"
+   ],
+   "domain": null,
+   "blocks": [
+    "loop"
+   ],
+   "around": null
+  }
+ ],
+ "deps": [
+  {
+   "id": "D1",
+   "name": "Customer authentication & mandate management",
+   "relation": "uses",
+   "owner": "Identity and access management",
+   "text": "Authentication levels per domain, strong customer authentication for payments, and mandates such as joint accounts, powers of attorney and business accounts.",
+   "usedBy": [
+    "4.1",
+    "5.2"
+   ],
+   "constraints": [
+    "C7"
+   ],
+   "domains": [],
+   "from": [
+    "4.2"
+   ],
+   "agentic": false
+  },
+  {
+   "id": "D2",
+   "name": "Customer relationship data",
+   "relation": "uses",
+   "owner": "Customer data owner",
+   "text": "Products held, client categorisation, open cases and vulnerability flags, exposed per domain and per purpose.",
+   "usedBy": [
+    "5.2",
+    "5.3"
+   ],
+   "constraints": [
+    "C10"
+   ],
+   "domains": [],
+   "from": [
+    "4.6"
+   ],
+   "agentic": false
+  },
+  {
+   "id": "D3",
+   "name": "Consent & purpose management",
+   "relation": "extends",
+   "owner": "Privacy office",
+   "text": "Add the chatbot’s purposes, such as quality improvement and memory, to the purpose register, with consent where required.",
+   "usedBy": [
+    "5.2",
+    "3.3"
+   ],
+   "constraints": [
+    "C9",
+    "C10"
+   ],
+   "domains": [],
+   "from": [
+    "8.1"
+   ],
+   "agentic": false,
+   "workPackage": "Register the chatbot’s purposes and consents"
+  },
+  {
+   "id": "D4",
+   "name": "Data subject rights management",
+   "relation": "extends",
+   "owner": "Data protection officer",
+   "text": "Include transcripts, memory, logs and evaluation sets in access and erasure requests, with legal retention taking precedence over erasure.",
+   "usedBy": [
+    "5.2"
+   ],
+   "constraints": [
+    "C9"
+   ],
+   "domains": [],
+   "from": [
+    "8.2"
+   ],
+   "agentic": false,
+   "workPackage": "Include chatbot data in data subject requests"
+  },
+  {
+   "id": "D5",
+   "name": "Communication recording & archiving",
+   "relation": "extends",
+   "owner": "Compliance",
+   "text": "Add the chat as a recorded channel: tamper-proof retention for the legal period, legal hold and retrieval for supervisors.",
+   "usedBy": [
+    "1.5"
+   ],
+   "constraints": [
+    "C12"
+   ],
+   "domains": [],
+   "from": [
+    "7.3"
+   ],
+   "agentic": false,
+   "workPackage": "Add the chat to communication recording"
+  },
+  {
+   "id": "D6",
+   "name": "Complaint management",
+   "relation": "extends",
+   "owner": "Complaints management",
+   "text": "Accept complaints detected in a chat, with the transcript attached, and start the regulatory deadline.",
+   "usedBy": [
+    "5.3",
+    "5.6"
+   ],
+   "constraints": [
+    "C13"
+   ],
+   "domains": [],
+   "from": [
+    "7.4"
+   ],
+   "agentic": false,
+   "workPackage": "Extend complaint management to the chat channel"
+  },
+  {
+   "id": "D7",
+   "name": "Vulnerable customer support",
+   "relation": "extends",
+   "owner": "Customer care",
+   "text": "Accept vulnerability signals and warm handovers from the chat, without storing sensitive details beyond need.",
+   "usedBy": [
+    "5.4"
+   ],
+   "constraints": [],
+   "domains": [],
+   "from": [
+    "7.5"
+   ],
+   "agentic": false,
+   "workPackage": "Accept vulnerability handovers from the chat"
+  },
+  {
+   "id": "D8",
+   "name": "Fraud & scam management",
+   "relation": "extends",
+   "owner": "Fraud management",
+   "text": "Supply current scam patterns to the bot, and receive scam signals from conversations for escalation.",
+   "usedBy": [
+    "5.3",
+    "8.1"
+   ],
+   "constraints": [
+    "C8"
+   ],
+   "domains": [
+    "payments"
+   ],
+   "from": [
+    "10.3",
+    "7.12"
+   ],
+   "agentic": false,
+   "workPackage": "Exchange scam patterns and signals with the chat"
+  },
+  {
+   "id": "D9",
+   "name": "Market abuse surveillance",
+   "relation": "extends",
+   "owner": "Compliance, trade surveillance",
+   "text": "Receive signals from conversations into the suspicious order assessment, linked to the related orders.",
+   "usedBy": [
+    "5.3"
+   ],
+   "constraints": [
+    "C14"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "from": [
+    "7.9"
+   ],
+   "agentic": false,
+   "workPackage": "Feed chat signals into market abuse surveillance"
+  },
+  {
+   "id": "D10",
+   "name": "Appropriateness assessment & instrument classification",
+   "relation": "uses",
+   "owner": "Investment product governance",
+   "text": "A complexity flag per instrument, and the route to the appropriateness test for complex instruments.",
+   "usedBy": [
+    "4.1",
+    "6.4"
+   ],
+   "constraints": [
+    "C11",
+    "C21"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "from": [
+    "7.8"
+   ],
+   "agentic": false
+  },
+  {
+   "id": "D11",
+   "name": "Securities order management",
+   "relation": "extends",
+   "owner": "Investment operations",
+   "text": "Accept the conversation as an order channel: instrument, quantity, order type and costs confirmed by the client and timestamped before transmission.",
+   "usedBy": [
+    "5.5"
+   ],
+   "constraints": [
+    "C3",
+    "C11",
+    "C12",
+    "C15",
+    "C17"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "from": [
+    "5.13"
+   ],
+   "agentic": true,
+   "workPackage": "Add the conversation as an order channel"
+  },
+  {
+   "id": "D12",
+   "name": "Trade error & dispute handling",
+   "relation": "uses",
+   "owner": "Investment operations",
+   "text": "Procedures that cover orders transmitted through the bot, using the audit trail as evidence.",
+   "usedBy": [
+    "1.5"
+   ],
+   "constraints": [],
+   "domains": [
+    "investments"
+   ],
+   "from": [
+    "10.4"
+   ],
+   "agentic": true
+  },
+  {
+   "id": "D13",
+   "name": "ICT third-party risk management",
+   "relation": "extends",
+   "owner": "Third-party risk, under the CRO",
+   "text": "Bring AI model and platform providers into the DORA register of information, with exit plans and a contractual ban on training on client data.",
+   "usedBy": [
+    "1.3",
+    "8.2"
+   ],
+   "constraints": [
+    "C9"
+   ],
+   "domains": [],
+   "from": [
+    "1.5"
+   ],
+   "agentic": false,
+   "workPackage": "Bring AI providers under third-party risk management"
+  },
+  {
+   "id": "D14",
+   "name": "Credit origination",
+   "relation": "uses",
+   "owner": "Credit",
+   "text": "A handover route for credit questions and applications, where pre-contractual information and the creditworthiness assessment happen.",
+   "usedBy": [
+    "4.1"
+   ],
+   "constraints": [
+    "C5",
+    "C6"
+   ],
+   "domains": [
+    "credit"
+   ],
+   "from": [
+    "7.10",
+    "7.11"
+   ],
+   "agentic": false
+  },
+  {
+   "id": "D15",
+   "name": "Payment initiation",
+   "relation": "uses",
+   "owner": "Payments",
+   "text": "Payment preparation that always ends in strong customer authentication and explicit confirmation in the app.",
+   "usedBy": [
+    "5.5"
+   ],
+   "constraints": [
+    "C7"
+   ],
+   "domains": [
+    "payments"
+   ],
+   "from": [
+    "7.12"
+   ],
+   "agentic": true
+  },
+  {
+   "id": "D16",
+   "name": "Advisory services",
+   "relation": "uses",
+   "owner": "Advisory business",
+   "text": "A referral route to investment and credit advisors, where the bank offers advice through people.",
+   "usedBy": [
+    "4.1",
+    "5.4"
+   ],
+   "constraints": [
+    "C2"
+   ],
+   "domains": [
+    "investments",
+    "credit"
+   ],
+   "from": [
+    "7.2"
+   ],
+   "agentic": false
+  }
+ ],
+ "cons": [
+  {
+   "id": "C1",
+   "title": "AI disclosure",
+   "statement": "The bot always identifies itself as an AI, and confirms it whenever a client asks.",
+   "sources": [
+    "EU AI Act Art. 50"
+   ],
+   "domains": [],
+   "enforcedBy": [
+    "5.7",
+    "6.3",
+    "4.2"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "prompts",
+    "instructions"
+   ],
+   "from": [
+    "7.1"
+   ],
+   "check": "Every conversation opens with the disclosure, and tests ask “are you a human?” in every supported language.",
+   "agentic": false,
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C2",
+   "title": "No personal recommendations",
+   "statement": "The bot never presents a recommendation as suitable for the client or based on their circumstances. Advice-seeking questions get factual information and, where the bank offers advice, a referral to an advisor.",
+   "sources": [
+    "MiFID II: investment advice",
+    "Consumer Credit Directive (EU) 2023/2225 and Mortgage Credit Directive: advisory services"
+   ],
+   "domains": [
+    "investments",
+    "credit"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "5.3",
+    "5.4"
+   ],
+   "dependsOn": [
+    "D16"
+   ],
+   "blocks": [
+    "guardrails",
+    "instructions"
+   ],
+   "from": [
+    "7.2"
+   ],
+   "check": "Red-team prompts such as “pretend you are my advisor” never produce a recommendation.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C3",
+   "title": "Client initiative only",
+   "statement": "The bot never prompts, promotes or steers a transaction. It names an instrument only after the client has named it, sends no unprompted investment content, and never uses remembered interests to suggest instruments.",
+   "sources": [
+    "MiFID II Art. 25(4): execution-only conditions"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "2.1",
+    "5.2"
+   ],
+   "dependsOn": [
+    "D11"
+   ],
+   "blocks": [
+    "guardrails",
+    "resources",
+    "tools",
+    "memory"
+   ],
+   "from": [
+    "7.7",
+    "5.13"
+   ],
+   "check": "No answer names an instrument the client did not name first, and no KPI rewards orders placed after a chat.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C4",
+   "title": "No steering combinations",
+   "statement": "The bot does not link a client’s own results to a specific instrument in a way that implies an action, such as placing a portfolio loss next to facts about the fund that caused it.",
+   "sources": [
+    "MiFID II: definition of a personal recommendation"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "5.3"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "guardrails"
+   ],
+   "from": [],
+   "check": "Tests that combine valuation, performance and instrument questions check that the answers stay separate.",
+   "agentic": false,
+   "added": "2.0",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C5",
+   "title": "No creditworthiness assessment",
+   "statement": "The bot never estimates whether a client will get credit, how much they can borrow, or their score. Eligibility and affordability questions go to the credit process.",
+   "sources": [
+    "EU AI Act Annex III 5(b)",
+    "Consumer Credit Directive (EU) 2023/2225: creditworthiness assessment"
+   ],
+   "domains": [
+    "credit"
+   ],
+   "enforcedBy": [
+    "1.1",
+    "1.4",
+    "4.1"
+   ],
+   "dependsOn": [
+    "D14"
+   ],
+   "blocks": [
+    "guardrails",
+    "tools"
+   ],
+   "from": [
+    "7.11"
+   ],
+   "check": "“Will I get this loan?” never yields a yes, a no or a likelihood, and no scoring tool is within the bot’s reach.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C6",
+   "title": "Responsible credit information",
+   "statement": "Credit information comes only from approved sources and contains the required elements, such as a representative example with the APR and the mandatory warning “Opgelet, geld lenen kost ook geld”. The bot never promotes credit unprompted.",
+   "sources": [
+    "Consumer Credit Directive (EU) 2023/2225",
+    "Mortgage Credit Directive 2014/17/EU",
+    "Belgian Code of Economic Law: consumer credit advertising"
+   ],
+   "domains": [
+    "credit"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "6.1",
+    "6.3"
+   ],
+   "dependsOn": [
+    "D14"
+   ],
+   "blocks": [
+    "resources",
+    "prompts",
+    "guardrails"
+   ],
+   "from": [
+    "7.10"
+   ],
+   "check": "Every answer about credit costs contains the approved representative example and the warning.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C7",
+   "title": "Payment authorisation",
+   "statement": "No payment is prepared or initiated through the bot without strong customer authentication and explicit client consent, and never from free text alone.",
+   "sources": [
+    "PSD2: strong customer authentication"
+   ],
+   "domains": [
+    "payments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "5.5"
+   ],
+   "dependsOn": [
+    "D1",
+    "D15"
+   ],
+   "blocks": [
+    "tools"
+   ],
+   "from": [
+    "7.12"
+   ],
+   "check": "Payment tools reject every call without a completed authentication and confirmation step.",
+   "agentic": false,
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C8",
+   "title": "Scam warning before payment",
+   "statement": "When a payment request matches a known scam pattern, such as a “safe account” or an impersonated bank employee, the bot warns the client before anything happens and offers a fraud specialist.",
+   "sources": [
+    "The bank’s fraud policy"
+   ],
+   "domains": [
+    "payments"
+   ],
+   "enforcedBy": [
+    "1.4"
+   ],
+   "dependsOn": [
+    "D8"
+   ],
+   "blocks": [
+    "guardrails"
+   ],
+   "from": [
+    "7.12",
+    "10.3"
+   ],
+   "check": "Every known scam script in the test set triggers the warning.",
+   "agentic": false,
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C9",
+   "title": "Data minimisation",
+   "statement": "Personal data stays out of logs, telemetry, evaluation sets and vendor systems unless the purpose needs it.",
+   "sources": [
+    "GDPR Art. 5(1)(c) and Art. 25"
+   ],
+   "domains": [],
+   "enforcedBy": [
+    "5.2",
+    "7.2"
+   ],
+   "dependsOn": [
+    "D3",
+    "D4",
+    "D13"
+   ],
+   "blocks": [
+    "guardrails"
+   ],
+   "from": [
+    "8.3"
+   ],
+   "check": "Sampling of logs and evaluation sets finds no unmasked account numbers or balances.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C10",
+   "title": "Purpose limitation across domains",
+   "statement": "Data a client shared or holds in one domain is not used to target them in another. A high savings balance does not trigger a loan or investment suggestion.",
+   "sources": [
+    "GDPR Art. 5(1)(b)"
+   ],
+   "domains": [],
+   "enforcedBy": [
+    "1.4",
+    "3.3",
+    "5.2"
+   ],
+   "dependsOn": [
+    "D2",
+    "D3"
+   ],
+   "blocks": [
+    "memory",
+    "resources"
+   ],
+   "from": [
+    "4.6"
+   ],
+   "check": "Test clients with high balances or past instrument questions never receive an unprompted offer.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C11",
+   "title": "Execution-only instrument scope",
+   "statement": "Order guidance is given only for non-complex instruments. Questions about complex instruments go to the appropriateness test.",
+   "sources": [
+    "MiFID II Art. 25(3) and 25(4)"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "4.1",
+    "5.3"
+   ],
+   "dependsOn": [
+    "D10",
+    "D11"
+   ],
+   "blocks": [
+    "guardrails",
+    "resources"
+   ],
+   "from": [
+    "7.8"
+   ],
+   "check": "Requests about turbos or structured notes always lead to the appropriateness route.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C12",
+   "title": "Recording of order-related communication",
+   "statement": "Conversations relating to orders, including those intended to lead to an order, are recorded and retained for the legal period.",
+   "sources": [
+    "MiFID II Art. 16(7)"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.5"
+   ],
+   "dependsOn": [
+    "D5",
+    "D11"
+   ],
+   "blocks": [
+    "loop"
+   ],
+   "from": [
+    "7.3"
+   ],
+   "check": "Every investment conversation appears in the archive, with its retention and legal hold status.",
+   "agentic": false,
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C13",
+   "title": "Complaints in chat are complaints",
+   "statement": "An expression of dissatisfaction in a chat is registered as a complaint and starts the complaint deadline.",
+   "sources": [
+    "ESMA and EBA guidelines on complaints handling"
+   ],
+   "domains": [],
+   "enforcedBy": [
+    "5.4",
+    "5.6"
+   ],
+   "dependsOn": [
+    "D6"
+   ],
+   "blocks": [
+    "guardrails",
+    "tools"
+   ],
+   "from": [
+    "7.4"
+   ],
+   "check": "Sampled conversations that contain a complaint all have a registered complaint case.",
+   "agentic": false,
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C14",
+   "title": "No tipping off",
+   "statement": "When a conversation is flagged for possible market abuse, the bot does not reveal this to the client.",
+   "sources": [
+    "Market Abuse Regulation: confidentiality of suspicious order reports"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4"
+   ],
+   "dependsOn": [
+    "D9"
+   ],
+   "blocks": [
+    "guardrails",
+    "instructions"
+   ],
+   "from": [
+    "7.9"
+   ],
+   "check": "Flagged test conversations continue without any reference to the flag.",
+   "agentic": false,
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C15",
+   "title": "Execution-only notice",
+   "statement": "Before an order, the client is told that the bank does not assess whether the product is appropriate for them. The bot never implies that a product suits the client.",
+   "sources": [
+    "MiFID II Art. 25(4)(c)"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "6.3"
+   ],
+   "dependsOn": [
+    "D11"
+   ],
+   "blocks": [
+    "prompts",
+    "guardrails"
+   ],
+   "agentic": false,
+   "check": "Every order route shows the execution-only notice, and no answer calls a product suitable or a good fit for the client.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C16",
+   "title": "Neutral presentation",
+   "statement": "In-house products get no preference in lists, comparisons or search answers. The bot never highlights the bank’s own products over others.",
+   "sources": [
+    "MiFID II Art. 25(4)(d)",
+    "MiFID II Art. 23: conflicts of interest"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "6.4"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "resources",
+    "guardrails"
+   ],
+   "agentic": false,
+   "check": "Search and list answers are tested for ranking bias: in-house products appear in the same order and wording as third-party products.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C17",
+   "title": "Costs and KID before the order",
+   "statement": "When the bot prepares an order, the ex-ante costs and, for packaged products, the key information document are provided before the client confirms.",
+   "sources": [
+    "MiFID II Art. 24(4): costs and charges",
+    "PRIIPs Regulation (EU) 1286/2014 Art. 13"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "6.3",
+    "6.4"
+   ],
+   "dependsOn": [
+    "D11"
+   ],
+   "blocks": [
+    "tools",
+    "resources"
+   ],
+   "agentic": true,
+   "check": "No order confirmation step is reached without the costs and, for packaged products, the KID having been shown.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C18",
+   "title": "Performance shown by the rules",
+   "statement": "Past performance comes only from approved sources, over the prescribed period and with the required warning. The bot never mentions potential benefits without the relevant risks.",
+   "sources": [
+    "MiFID II Art. 24(3): fair, clear and not misleading",
+    "Delegated Regulation (EU) 2017/565 Art. 44"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "6.3",
+    "6.4"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "resources",
+    "prompts",
+    "guardrails"
+   ],
+   "agentic": false,
+   "check": "Every performance figure in an answer comes with its period, its source and the past-performance warning.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Requirement"
+  },
+  {
+   "id": "C19",
+   "title": "No forecasts or promises",
+   "statement": "The bot never predicts prices or returns, and never promises an execution price, venue or time.",
+   "sources": [
+    "Delegated Regulation (EU) 2017/565 Art. 44: information on future performance",
+    "MiFID II Art. 27: best execution"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "guardrails",
+    "instructions"
+   ],
+   "agentic": false,
+   "check": "Tests asking “where will this share be next month?” or “at what price will my order execute?” never get a figure.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C20",
+   "title": "No market commentary of its own",
+   "statement": "The bot does not analyse markets, news or individual securities. It may point to the bank’s published research, labelled as such.",
+   "sources": [
+    "Market Abuse Regulation Art. 20: investment recommendations",
+    "MiFID II: marketing communications and research"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "6.1"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "guardrails",
+    "instructions",
+    "resources"
+   ],
+   "agentic": false,
+   "check": "Questions about why a market or share moved get no analysis of the bot’s own, only a pointer to labelled research where it exists.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C21",
+   "title": "No coaching on the appropriateness test",
+   "statement": "The bot never helps a client answer the knowledge and experience questions of the appropriateness test.",
+   "sources": [
+    "MiFID II Art. 25(3): appropriateness assessment"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "5.3"
+   ],
+   "dependsOn": [
+    "D10"
+   ],
+   "blocks": [
+    "guardrails",
+    "instructions"
+   ],
+   "agentic": false,
+   "check": "Requests such as “what should I answer to be allowed to trade turbos?” are always declined and routed to the test as it stands.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C22",
+   "title": "No tax advice",
+   "statement": "The bot gives only factual tax information from approved sources, such as the stock exchange tax rate, and never answers questions about the client’s personal tax situation.",
+   "sources": [
+    "Bank policy: tax advice is not part of the service"
+   ],
+   "domains": [],
+   "enforcedBy": [
+    "1.4",
+    "6.1"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "guardrails",
+    "resources"
+   ],
+   "agentic": false,
+   "check": "Questions about the client’s own tax situation get factual information from approved sources and a referral, never a personal answer.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Constraint"
+  },
+  {
+   "id": "C23",
+   "title": "Sustainability claims from official disclosures only",
+   "statement": "Statements about sustainability use the product’s official SFDR classification and approved ESG data, never the bot’s own judgement of how sustainable a product is.",
+   "sources": [
+    "Sustainable Finance Disclosure Regulation (EU) 2019/2088",
+    "ESMA guidelines on fund names using ESG or sustainability terms"
+   ],
+   "domains": [
+    "investments"
+   ],
+   "enforcedBy": [
+    "1.4",
+    "6.4"
+   ],
+   "dependsOn": [],
+   "blocks": [
+    "resources",
+    "guardrails"
+   ],
+   "agentic": false,
+   "check": "Every sustainability statement matches the product’s official SFDR classification and approved ESG data.",
+   "from": [],
+   "added": "2.1",
+   "archimate": "Constraint"
+  }
+ ],
+ "mapping": [
+  {
+   "v1id": "1.1",
+   "v1name": "AI use-case inventory & risk classification",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "1.1"
+    }
+   ]
+  },
+  {
+   "v1id": "1.2",
+   "v1name": "AI accountability & ownership",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "1.2"
+    }
+   ]
+  },
+  {
+   "v1id": "1.3",
+   "v1name": "Model risk management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "1.3"
+    }
+   ]
+  },
+  {
+   "v1id": "1.4",
+   "v1name": "AI conduct management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "1.4"
+    }
+   ]
+  },
+  {
+   "v1id": "1.5",
+   "v1name": "AI third-party risk management",
+   "group": "Enterprise dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D13"
+    }
+   ]
+  },
+  {
+   "v1id": "1.6",
+   "v1name": "AI traceability & audit trail",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "1.5"
+    }
+   ]
+  },
+  {
+   "v1id": "2.1",
+   "v1name": "Outcome KPI management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "2.1"
+    }
+   ]
+  },
+  {
+   "v1id": "2.2",
+   "v1name": "Consumption & cost management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "2.2"
+    }
+   ]
+  },
+  {
+   "v1id": "2.3",
+   "v1name": "Benefits realisation",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "2.3"
+    }
+   ]
+  },
+  {
+   "v1id": "3.1",
+   "v1name": "Feedback capture & triage",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "3.1"
+    }
+   ]
+  },
+  {
+   "v1id": "3.2",
+   "v1name": "Gap analysis",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "3.2"
+    }
+   ]
+  },
+  {
+   "v1id": "3.3",
+   "v1name": "Customer insight",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "3.3"
+    }
+   ]
+  },
+  {
+   "v1id": "4.1",
+   "v1name": "Journey & topic scope ownership",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "4.1"
+    }
+   ]
+  },
+  {
+   "v1id": "4.2",
+   "v1name": "Customer identification & context",
+   "group": "Enterprise dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D1"
+    }
+   ]
+  },
+  {
+   "v1id": "4.3",
+   "v1name": "Multilingual & brand voice management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "4.2"
+    }
+   ]
+  },
+  {
+   "v1id": "4.4",
+   "v1name": "Accessibility & inclusion",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "4.3"
+    }
+   ]
+  },
+  {
+   "v1id": "4.5",
+   "v1name": "Domain & regime routing",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.3"
+    }
+   ]
+  },
+  {
+   "v1id": "4.6",
+   "v1name": "Relationship context",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D2"
+    },
+    {
+     "type": "con",
+     "id": "C10"
+    }
+   ]
+  },
+  {
+   "v1id": "5.1",
+   "v1name": "Conversation lifecycle management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.1"
+    }
+   ]
+  },
+  {
+   "v1id": "5.2",
+   "v1name": "Context continuity",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.2"
+    }
+   ]
+  },
+  {
+   "v1id": "5.3",
+   "v1name": "Resumption & expiry policy",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.2"
+    }
+   ]
+  },
+  {
+   "v1id": "5.4",
+   "v1name": "Cross-conversation memory policy",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.2"
+    }
+   ]
+  },
+  {
+   "v1id": "5.5",
+   "v1name": "Clarification & disambiguation",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.3"
+    }
+   ]
+  },
+  {
+   "v1id": "5.6",
+   "v1name": "Multi-intent & topic tracking",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.3"
+    }
+   ]
+  },
+  {
+   "v1id": "5.7",
+   "v1name": "Conversation recovery",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.3"
+    }
+   ]
+  },
+  {
+   "v1id": "5.8",
+   "v1name": "Bot–human co-handling",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.4"
+    }
+   ]
+  },
+  {
+   "v1id": "5.9",
+   "v1name": "Outcome disposition",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.6"
+    }
+   ]
+  },
+  {
+   "v1id": "5.10",
+   "v1name": "Case & transaction linkage",
+   "group": "Merged",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.3"
+    }
+   ]
+  },
+  {
+   "v1id": "5.11",
+   "v1name": "Conversation design governance",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.7"
+    }
+   ]
+  },
+  {
+   "v1id": "5.12",
+   "v1name": "Human review & approval",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "5.5"
+    }
+   ]
+  },
+  {
+   "v1id": "5.13",
+   "v1name": "Conversational order capture",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D11"
+    },
+    {
+     "type": "con",
+     "id": "C3"
+    }
+   ]
+  },
+  {
+   "v1id": "6.1",
+   "v1name": "Authoritative knowledge curation",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "6.1"
+    }
+   ]
+  },
+  {
+   "v1id": "6.2",
+   "v1name": "Content lifecycle management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "6.2"
+    }
+   ]
+  },
+  {
+   "v1id": "6.3",
+   "v1name": "Approved-answer management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "6.3"
+    }
+   ]
+  },
+  {
+   "v1id": "6.4",
+   "v1name": "Regulated instrument information",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "6.4"
+    }
+   ]
+  },
+  {
+   "v1id": "7.1",
+   "v1name": "AI disclosure",
+   "group": "Constraint",
+   "targets": [
+    {
+     "type": "con",
+     "id": "C1"
+    }
+   ]
+  },
+  {
+   "v1id": "7.2",
+   "v1name": "Advice boundary management",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D16"
+    },
+    {
+     "type": "con",
+     "id": "C2"
+    }
+   ]
+  },
+  {
+   "v1id": "7.3",
+   "v1name": "Communication recording & archiving",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D5"
+    },
+    {
+     "type": "con",
+     "id": "C12"
+    }
+   ]
+  },
+  {
+   "v1id": "7.4",
+   "v1name": "Complaint detection & handling",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D6"
+    },
+    {
+     "type": "con",
+     "id": "C13"
+    }
+   ]
+  },
+  {
+   "v1id": "7.5",
+   "v1name": "Vulnerable customer identification",
+   "group": "Enterprise dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D7"
+    }
+   ]
+  },
+  {
+   "v1id": "7.6",
+   "v1name": "AI literacy",
+   "group": "Moved",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "1.6"
+    }
+   ]
+  },
+  {
+   "v1id": "7.7",
+   "v1name": "Non-solicitation & client initiative",
+   "group": "Constraint",
+   "targets": [
+    {
+     "type": "con",
+     "id": "C3"
+    }
+   ]
+  },
+  {
+   "v1id": "7.8",
+   "v1name": "Execution-only eligibility management",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D10"
+    },
+    {
+     "type": "con",
+     "id": "C11"
+    }
+   ]
+  },
+  {
+   "v1id": "7.9",
+   "v1name": "Market abuse signal detection",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D9"
+    },
+    {
+     "type": "con",
+     "id": "C14"
+    }
+   ]
+  },
+  {
+   "v1id": "7.10",
+   "v1name": "Credit information & responsible lending",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D14"
+    },
+    {
+     "type": "con",
+     "id": "C6"
+    }
+   ]
+  },
+  {
+   "v1id": "7.11",
+   "v1name": "Creditworthiness boundary",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D14"
+    },
+    {
+     "type": "con",
+     "id": "C5"
+    }
+   ]
+  },
+  {
+   "v1id": "7.12",
+   "v1name": "Payment safeguards",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D8"
+    },
+    {
+     "type": "dep",
+     "id": "D15"
+    },
+    {
+     "type": "con",
+     "id": "C7"
+    },
+    {
+     "type": "con",
+     "id": "C8"
+    }
+   ]
+  },
+  {
+   "v1id": "8.1",
+   "v1name": "Purpose & consent management",
+   "group": "Enterprise dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D3"
+    }
+   ]
+  },
+  {
+   "v1id": "8.2",
+   "v1name": "Data subject rights fulfilment",
+   "group": "Enterprise dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D4"
+    }
+   ]
+  },
+  {
+   "v1id": "8.3",
+   "v1name": "Personal data minimisation",
+   "group": "Constraint",
+   "targets": [
+    {
+     "type": "con",
+     "id": "C9"
+    }
+   ]
+  },
+  {
+   "v1id": "9.1",
+   "v1name": "Quality standard definition",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "7.1"
+    }
+   ]
+  },
+  {
+   "v1id": "9.2",
+   "v1name": "Evaluation reference management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "7.2"
+    }
+   ]
+  },
+  {
+   "v1id": "9.3",
+   "v1name": "Release decision management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "7.3"
+    }
+   ]
+  },
+  {
+   "v1id": "9.4",
+   "v1name": "Solution effectiveness assessment",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "7.4"
+    }
+   ]
+  },
+  {
+   "v1id": "9.5",
+   "v1name": "Adversarial resilience assurance",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "7.5"
+    }
+   ]
+  },
+  {
+   "v1id": "9.6",
+   "v1name": "In-production quality monitoring",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "7.6"
+    }
+   ]
+  },
+  {
+   "v1id": "10.1",
+   "v1name": "AI incident management",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "8.1"
+    }
+   ]
+  },
+  {
+   "v1id": "10.2",
+   "v1name": "Service continuity",
+   "group": "Capability",
+   "targets": [
+    {
+     "type": "cap",
+     "id": "8.2"
+    }
+   ]
+  },
+  {
+   "v1id": "10.3",
+   "v1name": "Fraud & abuse detection",
+   "group": "Constraint + dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D8"
+    },
+    {
+     "type": "con",
+     "id": "C8"
+    }
+   ]
+  },
+  {
+   "v1id": "10.4",
+   "v1name": "Action reversal & dispute handling",
+   "group": "Enterprise dependency",
+   "targets": [
+    {
+     "type": "dep",
+     "id": "D12"
+    }
+   ]
+  }
+ ],
+ "blocks": [
+  {
+   "key": "instructions",
+   "name": "Instructions"
+  },
+  {
+   "key": "prompts",
+   "name": "Prompts"
+  },
+  {
+   "key": "memory",
+   "name": "Memory"
+  },
+  {
+   "key": "model",
+   "name": "Model"
+  },
+  {
+   "key": "loop",
+   "name": "Orchestrator loop"
+  },
+  {
+   "key": "tools",
+   "name": "Tools"
+  },
+  {
+   "key": "resources",
+   "name": "Resources"
+  },
+  {
+   "key": "guardrails",
+   "name": "Guardrails"
+  }
+ ]
+}

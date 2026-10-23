@@ -1,0 +1,32 @@
+[
+ {
+  "key": "01-capability-map",
+  "title": "Capability map",
+  "desc": "Level 1, Level 2 and Level 3 capabilities, nested to show composition."
+ },
+ {
+  "key": "02-enterprise-dependencies",
+  "title": "Enterprise dependencies",
+  "desc": "Enterprise capabilities serving the chatbot capabilities that need them, with a work package for each one that must be extended."
+ },
+ {
+  "key": "03-drivers-and-rules",
+  "title": "Drivers and rules",
+  "desc": "Every requirement and constraint, traced to the regulation or policy that drives it."
+ },
+ {
+  "key": "04-rules-bank-wide-credit-payments",
+  "title": "Bank-wide, credit and payment rules",
+  "desc": "Which capabilities realise the bank-wide rules and the credit and daily banking rules."
+ },
+ {
+  "key": "05-rules-investment-conduct",
+  "title": "Investment conduct rules",
+  "desc": "Which capabilities realise the rules on advice, initiative and steering for execution-only investments."
+ },
+ {
+  "key": "06-rules-investment-information",
+  "title": "Investment information and record rules",
+  "desc": "Which capabilities realise the rules on instrument scope, information, records and market abuse."
+ }
+]

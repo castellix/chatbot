@@ -1,0 +1,87 @@
+@startuml
+!include <archimate/Archimate>
+title AI chatbot capability model – enterprise dependencies
+left to right direction
+' Serving: the enterprise capability serves the chatbot capability that needs it.
+' Extends: the enterprise capability must change; the work package carries that change.
+
+Grouping(grpWork, "Changes to enterprise capabilities") {
+  Implementation_WorkPackage(wpD3, "Register the chatbot’s purposes and consents")
+  Implementation_WorkPackage(wpD4, "Include chatbot data in data subject requests")
+  Implementation_WorkPackage(wpD5, "Add the chat to communication recording")
+  Implementation_WorkPackage(wpD6, "Extend complaint management to the chat channel")
+  Implementation_WorkPackage(wpD7, "Accept vulnerability handovers from the chat")
+  Implementation_WorkPackage(wpD8, "Exchange scam patterns and signals with the chat")
+  Implementation_WorkPackage(wpD9, "Feed chat signals into market abuse surveillance")
+  Implementation_WorkPackage(wpD11, "Add the conversation as an order channel")
+  Implementation_WorkPackage(wpD13, "Bring AI providers under third-party risk management")
+}
+Grouping(grpExtended, "Enterprise capabilities the chatbot extends") {
+  Strategy_Capability(d3, "D3 Consent & purpose management")
+  Strategy_Capability(d4, "D4 Data subject rights management")
+  Strategy_Capability(d5, "D5 Communication recording & archiving")
+  Strategy_Capability(d6, "D6 Complaint management")
+  Strategy_Capability(d7, "D7 Vulnerable customer support")
+  Strategy_Capability(d8, "D8 Fraud & scam management")
+  Strategy_Capability(d9, "D9 Market abuse surveillance")
+  Strategy_Capability(d11, "D11 Securities order management")
+  Strategy_Capability(d13, "D13 ICT third-party risk management")
+}
+Grouping(grpUsed, "Enterprise capabilities the chatbot uses") {
+  Strategy_Capability(d1, "D1 Customer authentication & mandate management")
+  Strategy_Capability(d2, "D2 Customer relationship data")
+  Strategy_Capability(d10, "D10 Appropriateness assessment & instrument classification")
+  Strategy_Capability(d12, "D12 Trade error & dispute handling")
+  Strategy_Capability(d14, "D14 Credit origination")
+  Strategy_Capability(d15, "D15 Payment initiation")
+  Strategy_Capability(d16, "D16 Advisory services")
+}
+Grouping(grpChatbot, "AI chatbot capabilities") {
+  Strategy_Capability(cap1_3, "1.3 Model risk management")
+  Strategy_Capability(cap1_5, "1.5 AI traceability & audit trail")
+  Strategy_Capability(cap3_3, "3.3 Customer insight")
+  Strategy_Capability(cap4_1, "4.1 Journey & scope management")
+  Strategy_Capability(cap5_2, "5.2 Conversation context management")
+  Strategy_Capability(cap5_3, "5.3 Conversation handling")
+  Strategy_Capability(cap5_4, "5.4 Bot–human co-handling")
+  Strategy_Capability(cap5_5, "5.5 Human review & approval")
+  Strategy_Capability(cap5_6, "5.6 Outcome disposition")
+  Strategy_Capability(cap6_4, "6.4 Regulated instrument information")
+  Strategy_Capability(cap8_1, "8.1 AI incident management")
+  Strategy_Capability(cap8_2, "8.2 Service continuity")
+}
+
+Rel_Association(wpD3, d3, "changes")
+Rel_Association(wpD4, d4, "changes")
+Rel_Association(wpD5, d5, "changes")
+Rel_Association(wpD6, d6, "changes")
+Rel_Association(wpD7, d7, "changes")
+Rel_Association(wpD8, d8, "changes")
+Rel_Association(wpD9, d9, "changes")
+Rel_Association(wpD11, d11, "changes")
+Rel_Association(wpD13, d13, "changes")
+Rel_Serving(d1, cap4_1, "uses")
+Rel_Serving(d1, cap5_2, "uses")
+Rel_Serving(d2, cap5_2, "uses")
+Rel_Serving(d2, cap5_3, "uses")
+Rel_Serving(d3, cap5_2, "extends")
+Rel_Serving(d3, cap3_3, "extends")
+Rel_Serving(d4, cap5_2, "extends")
+Rel_Serving(d5, cap1_5, "extends")
+Rel_Serving(d6, cap5_3, "extends")
+Rel_Serving(d6, cap5_6, "extends")
+Rel_Serving(d7, cap5_4, "extends")
+Rel_Serving(d8, cap5_3, "extends")
+Rel_Serving(d8, cap8_1, "extends")
+Rel_Serving(d9, cap5_3, "extends")
+Rel_Serving(d10, cap4_1, "uses")
+Rel_Serving(d10, cap6_4, "uses")
+Rel_Serving(d11, cap5_5, "extends, agentic")
+Rel_Serving(d12, cap1_5, "uses, agentic")
+Rel_Serving(d13, cap1_3, "extends")
+Rel_Serving(d13, cap8_2, "extends")
+Rel_Serving(d14, cap4_1, "uses")
+Rel_Serving(d15, cap5_5, "uses, agentic")
+Rel_Serving(d16, cap4_1, "uses")
+Rel_Serving(d16, cap5_4, "uses")
+@enduml

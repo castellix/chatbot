@@ -1,0 +1,47 @@
+@startuml
+!include <archimate/Archimate>
+title AI chatbot capability model – investment information and record rules
+left to right direction
+' Capabilities realise the rules. A rule that relies on an enterprise capability
+' is realised by the chatbot and that enterprise capability together.
+
+Grouping(grpChatbot, "AI chatbot capabilities") {
+  Strategy_Capability(cap1_4, "1.4 AI conduct management")
+  Strategy_Capability(cap1_5, "1.5 AI traceability & audit trail")
+  Strategy_Capability(cap4_1, "4.1 Journey & scope management")
+  Strategy_Capability(cap5_3, "5.3 Conversation handling")
+  Strategy_Capability(cap6_3, "6.3 Approved-answer management")
+  Strategy_Capability(cap6_4, "6.4 Regulated instrument information")
+}
+Grouping(grpRules, "Investment information and record rules") {
+  Motivation_Constraint(c11, "C11 Execution-only instrument scope")
+  Motivation_Requirement(c12, "C12 Recording of order-related communication")
+  Motivation_Constraint(c14, "C14 No tipping off")
+  Motivation_Requirement(c17, "C17 Costs and KID before the order")
+  Motivation_Requirement(c18, "C18 Performance shown by the rules")
+  Motivation_Constraint(c23, "C23 Sustainability claims from official disclosures only")
+}
+Grouping(grpEnterprise, "Enterprise capabilities") {
+  Strategy_Capability(d5, "D5 Communication recording & archiving")
+  Strategy_Capability(d9, "D9 Market abuse surveillance")
+  Strategy_Capability(d10, "D10 Appropriateness assessment & instrument classification")
+  Strategy_Capability(d11, "D11 Securities order management")
+}
+
+Rel_Realization(cap4_1, c11)
+Rel_Realization(cap5_3, c11)
+Rel_Realization(cap1_5, c12)
+Rel_Realization(cap1_4, c14)
+Rel_Realization(cap6_3, c17)
+Rel_Realization(cap6_4, c17)
+Rel_Realization(cap6_3, c18)
+Rel_Realization(cap6_4, c18)
+Rel_Realization(cap1_4, c23)
+Rel_Realization(cap6_4, c23)
+Rel_Realization(d10, c11)
+Rel_Realization(d11, c11)
+Rel_Realization(d5, c12)
+Rel_Realization(d11, c12)
+Rel_Realization(d9, c14)
+Rel_Realization(d11, c17)
+@enduml

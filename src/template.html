@@ -1,0 +1,569 @@
+<title>AI Chatbot Capability Model</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+Condensed:wght@600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: four layer tabs over one working area; capabilities as bands of Level 1 cards, dependencies and constraints as registers; a detail panel docked right on wide screens, a bottom sheet on phones. */
+:root {
+  --bg: #F2F4F2;
+  --surface: #FBFCFB;
+  --surface-2: #E8ECEB;
+  --ink: #17202A;
+  --ink-2: #3A4552;
+  --muted: #5A6572;
+  --line: #D2D8DC;
+  --steer: #1E4D5C;
+  --steer-tint: #E1ECEF;
+  --serve: #8C3A12;
+  --serve-tint: #F5E7DC;
+  --assure: #2F3B5C;
+  --assure-tint: #E3E6EF;
+  --dep: #3D5A80;
+  --dep-tint: #E4EAF3;
+  --con: #9B1C31;
+  --con-tint: #F7E4E7;
+  --dom: #2E6B4F;
+  --paper: #FFFFFF;
+  --on-band: #FBFCFB;
+  --focus: #1D5FD1;
+  --shadow: rgba(16, 24, 32, 0.18);
+  --font-display: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161C; --surface: #182029; --surface-2: #232D38; --ink: #E6EAEE; --ink-2: #C0C8D1; --muted: #939EAB; --line: #2C3642;
+    --steer: #7DBACB; --steer-tint: #17313A; --serve: #EA9468; --serve-tint: #3A251A; --assure: #A3B1DB; --assure-tint: #1F2738;
+    --dep: #9DB8E0; --dep-tint: #1C2738; --con: #F08A9B; --con-tint: #3A1D23; --dom: #8CCBAE; --paper: #FFFFFF;
+    --on-band: #11161C; --focus: #7AA7FF; --shadow: rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161C; --surface: #182029; --surface-2: #232D38; --ink: #E6EAEE; --ink-2: #C0C8D1; --muted: #939EAB; --line: #2C3642;
+  --steer: #7DBACB; --steer-tint: #17313A; --serve: #EA9468; --serve-tint: #3A251A; --assure: #A3B1DB; --assure-tint: #1F2738;
+  --dep: #9DB8E0; --dep-tint: #1C2738; --con: #F08A9B; --con-tint: #3A1D23; --dom: #8CCBAE; --paper: #FFFFFF;
+  --on-band: #11161C; --focus: #7AA7FF; --shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45; }
+[data-band="steer"] { --b: var(--steer); --b-tint: var(--steer-tint); }
+[data-band="serve"] { --b: var(--serve); --b-tint: var(--serve-tint); }
+[data-band="assure"] { --b: var(--assure); --b-tint: var(--assure-tint); }
+[data-kind="dep"] { --b: var(--dep); --b-tint: var(--dep-tint); }
+[data-kind="con"] { --b: var(--con); --b-tint: var(--con-tint); }
+
+.wrap { max-width: 1480px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; display: flex; flex-direction: column; gap: 20px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.top { display: flex; flex-direction: column; gap: 6px; max-width: 76ch; }
+.eyebrow { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(30px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.01em; text-wrap: balance; }
+.lede { margin: 0; color: var(--ink-2); font-size: 16px; }
+.lede a { color: var(--focus); }
+
+.layers { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.layer { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 12px; align-items: baseline; text-align: left; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; }
+.layer:hover { border-color: var(--muted); }
+.layer .n { grid-row: span 2; font-family: var(--font-display); font-weight: 600; font-size: 30px; line-height: 1; color: var(--lc); font-variant-numeric: tabular-nums; }
+.layer .t { font-weight: 600; font-size: 15px; }
+.layer .d { font-size: 13px; color: var(--muted); line-height: 1.35; }
+.layer[aria-selected="true"] { border-color: var(--lc); box-shadow: inset 0 -3px 0 var(--lc); background: var(--lc-tint); }
+.layer[data-tab="capabilities"] { --lc: var(--ink); --lc-tint: var(--surface-2); }
+.layer[data-tab="dependencies"] { --lc: var(--dep); --lc-tint: var(--dep-tint); }
+.layer[data-tab="constraints"] { --lc: var(--con); --lc-tint: var(--con-tint); }
+.layer[data-tab="mapping"] { --lc: var(--muted); --lc-tint: var(--surface-2); }
+.layer[data-tab="archimate"] { --lc: var(--steer); --lc-tint: var(--steer-tint); }
+
+.arch-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.arch-desc { margin: 0; color: var(--ink-2); max-width: 72ch; }
+.arch-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.arch-status { font-size: 13px; color: var(--muted); min-height: 1.2em; }
+.paper { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow: auto; max-height: 80vh; padding: 12px; }
+.paper img { display: block; max-width: none; margin: 0 auto; }
+.paper.fit img { width: 100%; height: auto; }
+.src { margin: 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; color: var(--ink); white-space: pre; overflow: auto; max-height: 420px; }
+.legend-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.legend-table td { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.legend-table td:first-child { font-weight: 600; color: var(--ink); padding-right: 12px; white-space: nowrap; }
+
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; padding-block: 12px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ctrl-label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+#q { width: 280px; max-width: 100%; padding: 7px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); font: inherit; }
+#q::placeholder { color: var(--muted); }
+.seg-btn { border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); padding: 5px 11px; border-radius: 6px; font-size: 13.5px; cursor: pointer; }
+.seg-btn:hover { border-color: var(--muted); }
+.seg-btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.count { margin: 0; font-size: 13.5px; color: var(--muted); font-variant-numeric: tabular-nums; margin-left: auto; }
+.link { border: 0; background: none; padding: 0 0 0 6px; color: var(--focus); text-decoration: underline; cursor: pointer; font-size: 13.5px; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (min-width: 1080px) { .layout { grid-template-columns: minmax(0, 1fr) 420px; } }
+@media (min-width: 1320px) { .layout { grid-template-columns: minmax(0, 1fr) 480px; } }
+main { min-width: 0; }
+.view { display: flex; flex-direction: column; gap: 22px; }
+.view-intro { margin: 0; max-width: 72ch; color: var(--ink-2); }
+
+.band { display: flex; flex-direction: column; gap: 10px; }
+.band-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.band-name { margin: 0; font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--b); }
+.band-meta { font-size: 13.5px; color: var(--muted); }
+.l1-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); align-items: start; }
+.l1 { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; }
+.l1-h { margin: 0; }
+.l1-head { width: 100%; display: flex; align-items: baseline; gap: 8px; padding: 10px 12px; border: 0; background: var(--b); color: var(--on-band); text-align: left; cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.2; }
+.l1-head .num { font-family: var(--font-mono); font-weight: 500; font-size: 12.5px; opacity: 0.85; }
+.l1-head .cnt { margin-left: auto; font-family: var(--font-mono); font-weight: 500; font-size: 12px; opacity: 0.9; font-variant-numeric: tabular-nums; }
+.l1-head[aria-pressed="true"] { box-shadow: inset 0 -3px 0 var(--on-band); }
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li + li .row { border-top: 1px solid var(--line); }
+.row { width: 100%; display: grid; grid-template-columns: 3em minmax(0, 1fr) auto; gap: 8px; align-items: baseline; padding: 8px 12px; border: 0; background: transparent; text-align: left; cursor: pointer; font-size: 14px; line-height: 1.35; transition: opacity 140ms, background-color 120ms; }
+.row .id { font-family: var(--font-mono); font-weight: 500; font-size: 12.5px; color: var(--b); font-variant-numeric: tabular-nums; }
+.row .sub { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.row:hover { background: var(--b-tint); }
+.row[aria-pressed="true"] { background: var(--b-tint); box-shadow: inset 3px 0 0 var(--b); }
+.row.is-dim { opacity: 0.3; }
+
+.register { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.register-head { margin: 0; padding: 10px 12px; background: var(--b); color: var(--on-band); font-family: var(--font-display); font-weight: 600; font-size: 17px; display: flex; align-items: baseline; gap: 10px; }
+.register-head .cnt { margin-left: auto; font-family: var(--font-mono); font-weight: 500; font-size: 12px; }
+.register-sub { margin: 0; padding: 8px 12px; font-size: 13.5px; color: var(--ink-2); background: var(--b-tint); }
+.con-row { grid-template-columns: 3em minmax(0, 1fr) auto; }
+.con-row .t { font-weight: 600; }
+.con-row .s { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+
+.tags { display: inline-flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.tag { font-family: var(--font-mono); font-weight: 500; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 5px; border-radius: 4px; white-space: nowrap; line-height: 1.5; }
+.tag-chg { color: var(--ink-2); background: var(--surface-2); }
+.tag-dom { color: var(--dom); border: 1px solid var(--dom); }
+.tag-ag { color: var(--muted); border: 1px dashed var(--muted); }
+.tag-rel { color: var(--dep); border: 1px solid var(--dep); }
+
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-mono); font-weight: 500; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); position: sticky; top: 0; }
+td.mono { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.out { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; padding: 1px 6px; border-radius: 4px; }
+.out-cap { background: var(--surface-2); color: var(--ink-2); }
+.out-dep { background: var(--dep-tint); color: var(--dep); }
+.out-con { background: var(--con-tint); color: var(--con); }
+.go { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 1px 6px; margin: 0 4px 4px 0; font-family: var(--font-mono); font-size: 12px; cursor: pointer; }
+.go:hover { border-color: var(--muted); }
+.go[data-type="dep"] { color: var(--dep); }
+.go[data-type="con"] { color: var(--con); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+@media (min-width: 1080px) { .panel { position: sticky; top: calc(16px + env(safe-area-inset-top, 0px)); max-height: calc(100vh - 32px); overflow: auto; } }
+@media (max-width: 1079px) {
+  .panel.is-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; max-height: 78vh; overflow: auto; border-radius: 14px 14px 0 0; border-bottom: 0; box-shadow: 0 -10px 30px var(--shadow); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
+}
+.p-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.p-eyebrow { margin: 0; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.p-close { border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 6px; padding: 3px 10px; font-size: 13px; cursor: pointer; }
+.p-title { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 26px; line-height: 1.15; text-wrap: balance; }
+.p-title .id { font-family: var(--font-mono); font-weight: 500; font-size: 18px; color: var(--b, var(--ink-2)); margin-right: 6px; }
+.p-lead { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink); }
+.p-note { margin: 0; font-size: 13.5px; color: var(--ink-2); background: var(--surface-2); border-radius: 6px; padding: 8px 10px; }
+.p-sec { display: flex; flex-direction: column; gap: 6px; }
+.p-sec h3 { margin: 0; font-family: var(--font-mono); font-weight: 500; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.p-sec p { margin: 0; color: var(--ink-2); }
+.p-bullets { margin: 0; padding-left: 1.15em; display: flex; flex-direction: column; gap: 4px; color: var(--ink-2); }
+.p-bullets li::marker { color: var(--b, var(--muted)); }
+.l3 { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.l3 li { display: flex; flex-direction: column; }
+.l3 strong { font-weight: 600; font-size: 14px; color: var(--ink); }
+.l3 span { font-size: 13.5px; color: var(--ink-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); padding: 3px 9px; border-radius: 6px; font-size: 13px; }
+.rel { display: flex; flex-direction: column; gap: 6px; }
+.rel-btn { display: grid; grid-template-columns: 3em minmax(0, 1fr); gap: 8px; align-items: baseline; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 14px; line-height: 1.35; }
+.rel-btn:hover { border-color: var(--muted); }
+.rel-btn .id { font-family: var(--font-mono); font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.rel-btn[data-type="dep"] .id { color: var(--dep); }
+.rel-btn[data-type="con"] .id { color: var(--con); }
+.p-owner { margin: 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+.stats { display: flex; flex-direction: column; gap: 12px; }
+.stat { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; }
+.stat-name { font-size: 14px; font-weight: 500; }
+.stat-num { font-family: var(--font-mono); font-size: 13px; color: var(--b); font-variant-numeric: tabular-nums; }
+.bar { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--b); border-radius: 4px; }
+.model { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.model li { display: grid; grid-template-columns: 6px minmax(0, 1fr); gap: 10px; }
+.model .sw { border-radius: 3px; background: var(--b); }
+.model strong { display: block; font-size: 14px; }
+.model span { font-size: 13.5px; color: var(--ink-2); }
+
+footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Business capability model · Version 2 · Bank-wide AI chatbot</p>
+    <h1>AI Chatbot Capability Model</h1>
+    <p class="lede">Version 2 separates three things the first map mixed: the capabilities the chatbot brings, the bank’s existing capabilities it uses or extends, and the constraints it must respect. The first map stays available as <a href="https://claude.ai/artifact/SHzWZW9sqFed1spxQRBHNB" target="_blank" rel="noopener">AI Chatbot Capability Map</a>.</p>
+  </header>
+
+  <div class="layers" role="tablist" aria-label="Layers" id="layers"></div>
+
+  <div class="controls">
+    <div class="ctrl">
+      <label for="q" class="ctrl-label">Search</label>
+      <input id="q" type="search" placeholder="Try “credit”, “memory” or “C3”" autocomplete="off">
+    </div>
+    <div class="ctrl" role="group" aria-label="Domain">
+      <span class="ctrl-label">Domain</span>
+      <span class="ctrl" id="domains"></span>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+  </div>
+
+  <div class="layout">
+    <main id="main" aria-live="off"></main>
+    <aside class="panel" id="panel" aria-label="Details"></aside>
+  </div>
+
+  <footer>Version 2.2 · 22 October 2026 · Adds the ArchiMate views; 2.1 added constraints C15 to C23 · Bank-wide scope: daily banking, credit and investments, with investments offered execution-only in the app. Capabilities are what the bank must be able to do; constraints are rules it complies with or not; dependencies are capabilities the bank already has for every channel.</footer>
+</div>
+
+<script>
+(function () {
+  var DATA = /*__DATA__*/null;
+
+  var TABS = [
+    { key: 'capabilities', n: DATA.caps.length, t: 'Capabilities', d: 'What the chatbot itself must be able to do' },
+    { key: 'dependencies', n: DATA.deps.length, t: 'Enterprise dependencies', d: 'Existing bank capabilities it uses or extends' },
+    { key: 'constraints', n: DATA.cons.length, t: 'Constraints', d: 'Rules it must respect, each with an enforcer' },
+    { key: 'mapping', n: DATA.mapping.length, t: 'From version 1', d: 'Where each first-map capability went' },
+    { key: 'archimate', n: DATA.views.length, t: 'ArchiMate views', d: 'The model in PlantUML, view by view' }
+  ];
+  var VIEW = {}; DATA.views.forEach(function (v) { VIEW[v.key] = v; });
+  var DOMAINS = [
+    { key: 'all', name: 'All' }, { key: 'payments', name: 'Daily banking' },
+    { key: 'credit', name: 'Credit' }, { key: 'investments', name: 'Investments' }
+  ];
+  var DOM_NAME = { payments: 'Daily banking', credit: 'Credit', investments: 'Investments' };
+  var CHANGE = { merged: 'Merged', moved: 'Moved' };
+
+  var L1 = {}, CAP = {}, DEP = {}, CON = {}, BLK = {}, BAND = {};
+  DATA.l1.forEach(function (x) { L1[x.id] = x; });
+  DATA.caps.forEach(function (x) { CAP[x.id] = x; });
+  DATA.deps.forEach(function (x) { DEP[x.id] = x; });
+  DATA.cons.forEach(function (x) { CON[x.id] = x; });
+  DATA.blocks.forEach(function (x) { BLK[x.key] = x.name; });
+  DATA.bands.forEach(function (b) { BAND[b.key] = b; });
+
+  var state = { tab: 'capabilities', q: '', domain: 'all', sel: null, view: DATA.views[0].key, fit: true };
+  var main = document.getElementById('main');
+  var panel = document.getElementById('panel');
+  var countEl = document.getElementById('count');
+  var qEl = document.getElementById('q');
+  var layersEl = document.getElementById('layers');
+  var domainsEl = document.getElementById('domains');
+  var mq = window.matchMedia('(max-width: 1079px)');
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
+  function capsOf(n) { return DATA.caps.filter(function (c) { return c.l1 === n; }); }
+  function domsOf(item) { return item.domains ? item.domains : (item.domain ? [item.domain] : []); }
+  function domTags(item) { return domsOf(item).map(function (d) { return '<span class="tag tag-dom">' + esc(DOM_NAME[d]) + '</span>'; }).join(''); }
+  function domainOk(item) { var ds = domsOf(item); return state.domain === 'all' || !ds.length || ds.indexOf(state.domain) >= 0; }
+  function hay(item) {
+    var parts = [item.id, item.name || item.title || '', item.summary || '', item.statement || '', item.text || '', (item.includes || []).join(' '), (item.l3 || []).map(function (r) { return r.join(' '); }).join(' '), (item.from || []).join(' '), item.owner || ''];
+    return parts.join(' ').toLowerCase();
+  }
+  function searchOk(item) { return !state.q || hay(item).indexOf(state.q.toLowerCase()) >= 0; }
+
+  // ---------- views
+  function rowCap(c) {
+    var t = '';
+    if (CHANGE[c.change]) t += '<span class="tag tag-chg">' + CHANGE[c.change] + '</span>';
+    t += domTags(c);
+    return '<li><button type="button" class="row" data-sel="cap:' + c.id + '" aria-pressed="false"><span class="id">' + c.id + '</span><span>' + esc(c.name) + '</span><span class="tags">' + t + '</span></button></li>';
+  }
+  function viewCaps() {
+    return '<div class="view"><p class="view-intro">The chatbot’s own capabilities: abilities the bank can be more or less mature in, each with an owner, people, process and technology. Select a capability to see the constraints it enforces and the bank capabilities it relies on.</p>' +
+      DATA.bands.map(function (b) {
+        var caps = DATA.caps.filter(function (c) { return b.l1.indexOf(c.l1) >= 0; });
+        return '<section class="band" data-band="' + b.key + '"><div class="band-head"><h2 class="band-name">' + esc(b.name) + '</h2><span class="band-meta">' + esc(b.desc) + ' · ' + caps.length + ' capabilities</span></div>' +
+          '<div class="l1-grid">' + b.l1.map(function (n) {
+            var l = L1[n], cs = capsOf(n);
+            return '<article class="l1"><h3 class="l1-h"><button type="button" class="l1-head" data-sel="l1:' + n + '" aria-pressed="false"><span class="num">' + n + '</span><span>' + esc(l.name) + '</span><span class="cnt" data-cnt="' + n + '">' + cs.length + '</span></button></h3><ul class="rows">' + cs.map(rowCap).join('') + '</ul></article>';
+          }).join('') + '</div></section>';
+      }).join('') + '</div>';
+  }
+  function rowDep(d) {
+    var t = '<span class="tag tag-rel">' + esc(d.relation) + '</span>' + domTags(d) + (d.agentic ? '<span class="tag tag-ag">Agentic</span>' : '');
+    return '<li><button type="button" class="row" data-sel="dep:' + d.id + '" aria-pressed="false"><span class="id">' + d.id + '</span><span>' + esc(d.name) + '<span class="sub">' + esc(d.owner) + '</span></span><span class="tags">' + t + '</span></button></li>';
+  }
+  function viewDeps() {
+    var uses = DATA.deps.filter(function (d) { return d.relation === 'uses'; });
+    var ext = DATA.deps.filter(function (d) { return d.relation === 'extends'; });
+    function reg(title, sub, list) {
+      return '<section class="register" data-kind="dep"><h2 class="register-head">' + esc(title) + '<span class="cnt">' + list.length + '</span></h2><p class="register-sub">' + esc(sub) + '</p><ul class="rows">' + list.map(rowDep).join('') + '</ul></section>';
+    }
+    return '<div class="view"><p class="view-intro">Capabilities the bank already has for every channel. The chatbot does not own them; it either uses them as they are or needs them extended to cover the chat. If one of them is missing, the chatbot fails even when its own capabilities are in place.</p>' +
+      reg('Extends', 'The capability exists, but must change to cover the chat channel', ext) +
+      reg('Uses', 'The capability exists and the chatbot relies on it as it is', uses) + '</div>';
+  }
+  function rowCon(k) {
+    return '<li><button type="button" class="row con-row" data-sel="con:' + k.id + '" aria-pressed="false"><span class="id">' + k.id + '</span><span><span class="t">' + esc(k.title) + '</span><span class="s">' + esc(k.statement) + '</span></span><span class="tags">' + (domTags(k) || '<span class="tag tag-chg">Bank-wide</span>') + (k.agentic ? '<span class="tag tag-ag">Agentic</span>' : '') + (k.added === '2.1' ? '<span class="tag tag-chg">New</span>' : '') + '</span></button></li>';
+  }
+  function viewCons() {
+    return '<div class="view"><p class="view-intro">Rules the chatbot complies with or not. They have no maturity of their own; each one names its source, the capabilities that enforce it and how to check it. The register is maintained under 1.4 AI conduct management.</p>' +
+      '<section class="register" data-kind="con"><h2 class="register-head">Constraint register<span class="cnt">' + DATA.cons.length + '</span></h2><ul class="rows">' + DATA.cons.map(rowCon).join('') + '</ul></section></div>';
+  }
+  function goBtn(t) { return '<button type="button" class="go" data-type="' + t.type + '" data-sel="' + t.type + ':' + t.id + '">' + t.id + '</button>'; }
+  function viewMap() {
+    var cls = { 'Capability': 'out-cap', 'Merged': 'out-cap', 'Moved': 'out-cap', 'Enterprise dependency': 'out-dep', 'Constraint': 'out-con', 'Constraint + dependency': 'out-con' };
+    return '<div class="view"><p class="view-intro">Every capability from the first map, and where it sits in version 2. Capabilities kept their content but may have a new number; merged ones became Level 3s; the rest became enterprise dependencies, constraints, or both.</p>' +
+      '<div class="tbl-wrap"><table><thead><tr><th scope="col">Version 1</th><th scope="col">Name in version 1</th><th scope="col">Became</th><th scope="col">Version 2</th></tr></thead><tbody>' +
+      DATA.mapping.map(function (m) {
+        return '<tr data-v1="' + m.v1id + '"><td class="mono">' + m.v1id + '</td><td>' + esc(m.v1name) + '</td><td><span class="out ' + cls[m.group] + '">' + esc(m.group) + '</span></td><td>' + m.targets.map(goBtn).join('') + '</td></tr>';
+      }).join('') + '</tbody></table></div></div>';
+  }
+
+  function viewArch() {
+    var v = VIEW[state.view];
+    return '<div class="view"><p class="view-intro">The same model in ArchiMate, written in the PlantUML convention with the standard ArchiMate library. Each view shows one concern; elements appear in several views but are the same element. Copy the source into your PlantUML editor to render or change it.</p>' +
+      '<div class="arch-bar" role="group" aria-label="View">' + DATA.views.map(function (x, i) {
+        return '<button type="button" class="seg-btn" data-view="' + x.key + '" aria-pressed="' + (x.key === state.view) + '">' + (i + 1) + ' · ' + esc(x.title) + '</button>';
+      }).join('') + '</div>' +
+      '<p class="arch-desc">' + esc(v.desc) + '</p>' +
+      '<div class="arch-tools"><button type="button" class="seg-btn" data-fit aria-pressed="' + state.fit + '">Fit to width</button>' +
+      '<button type="button" class="seg-btn" data-copy>Copy PlantUML</button><span class="arch-status" id="arch-status" aria-live="polite"></span></div>' +
+      '<div class="paper' + (state.fit ? ' fit' : '') + '"><img alt="' + esc(v.title) + ' rendered as an ArchiMate diagram" src="data:image/svg+xml;base64,' + v.svg + '"></div>' +
+      '<pre class="src" id="arch-src" tabindex="0" aria-label="PlantUML source">' + esc(v.puml) + '</pre></div>';
+  }
+
+  function render() {
+    main.innerHTML = { capabilities: viewCaps, dependencies: viewDeps, constraints: viewCons, mapping: viewMap, archimate: viewArch }[state.tab]();
+    layersEl.querySelectorAll('[data-tab]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === state.tab)); });
+    apply();
+    markSel();
+  }
+  function apply() {
+    var shown = 0, total = 0, per = {};
+    if (state.tab === 'archimate') {
+      domainsEl.querySelectorAll('[data-domain]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-domain') === state.domain)); });
+      countEl.textContent = DATA.views.length + ' views · search and domain apply to the other tabs';
+      return;
+    }
+    if (state.tab === 'mapping') {
+      main.querySelectorAll('tr[data-v1]').forEach(function (tr) {
+        total++;
+        var m = DATA.mapping.filter(function (x) { return x.v1id === tr.getAttribute('data-v1'); })[0];
+        var ok = !state.q || (m.v1id + ' ' + m.v1name + ' ' + m.group + ' ' + m.targets.map(function (t) { return t.id; }).join(' ')).toLowerCase().indexOf(state.q.toLowerCase()) >= 0;
+        tr.hidden = !ok; if (ok) shown++;
+      });
+    } else {
+      main.querySelectorAll('.row[data-sel]').forEach(function (el) {
+        var p = el.getAttribute('data-sel').split(':'), item = lookup(p[0], p[1]);
+        total++;
+        var ok = domainOk(item) && searchOk(item);
+        el.classList.toggle('is-dim', !ok);
+        if (ok) { shown++; if (p[0] === 'cap') per[item.l1] = (per[item.l1] || 0) + 1; }
+      });
+      if (state.tab === 'capabilities') DATA.l1.forEach(function (l) {
+        var el = main.querySelector('[data-cnt="' + l.id + '"]');
+        var n = capsOf(l.id).length;
+        if (el) el.textContent = filtering() ? (per[l.id] || 0) + '/' + n : String(n);
+      });
+    }
+    domainsEl.querySelectorAll('[data-domain]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-domain') === state.domain)); });
+    if (filtering()) countEl.innerHTML = 'Showing <strong>' + shown + '</strong> of ' + total + ' <button type="button" class="link" data-reset>Reset</button>';
+    else countEl.textContent = total + ' items · select one for details';
+  }
+  function filtering() { return !!state.q || (state.domain !== 'all' && state.tab !== 'mapping'); }
+
+  // ---------- panel
+  function sec(title, body) { return '<section class="p-sec"><h3>' + esc(title) + '</h3>' + body + '</section>'; }
+  function bullets(list) { return '<ul class="p-bullets">' + list.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+  function relList(type, ids) {
+    return '<div class="rel">' + ids.map(function (id) {
+      var it = lookup(type, id); if (!it) return '';
+      return '<button type="button" class="rel-btn" data-type="' + type + '" data-sel="' + type + ':' + id + '"><span class="id">' + id + '</span><span>' + esc(it.name || it.title) + '</span></button>';
+    }).join('') + '</div>';
+  }
+  function blockChips(keys) { return '<div class="chips">' + keys.map(function (k) { return '<span class="chip">' + esc(BLK[k]) + '</span>'; }).join('') + '</div>'; }
+  function head(eyebrow, id, title) { return '<div class="p-top"><p class="p-eyebrow">' + eyebrow + '</p><button type="button" class="p-close" data-close>Close</button></div><h2 class="p-title" tabindex="-1"><span class="id">' + esc(id) + '</span>' + esc(title) + '</h2>'; }
+  function lookup(type, id) { return { cap: CAP, dep: DEP, con: CON, l1: L1 }[type][id]; }
+  function enforcersOf(conId) { return DATA.caps.filter(function (c) { return c.enforces.indexOf(conId) >= 0; }).map(function (c) { return c.id; }); }
+  function changeNote(c) {
+    if (c.change === 'merged') return 'Merged in version 2 from ' + c.from.join(', ') + '. Those are now its Level 3s.';
+    if (c.change === 'moved') return 'Moved in version 2: was ' + c.from[0] + ' under Regulatory Compliance.';
+    if (c.change === 'renumbered') return 'Was ' + c.from[0] + ' in version 1; content unchanged.';
+    return 'Same number and content as in version 1.';
+  }
+
+  function renderArchIntro() {
+    panel.setAttribute('data-band', 'steer'); panel.removeAttribute('data-kind');
+    var row = function (a, b) { return '<tr><td>' + a + '</td><td>' + b + '</td></tr>'; };
+    panel.innerHTML = '<p class="p-eyebrow">ArchiMate conventions</p><h2 class="p-title" tabindex="-1">How the model is drawn</h2>' +
+      sec('Elements', '<table class="legend-table"><tbody>' +
+        row('Capability', 'Chatbot capabilities at Level 1, 2 and 3, and the enterprise capabilities they depend on (strategy layer)') +
+        row('Requirement', 'A rule that obliges the chatbot to do something, such as C1 AI disclosure') +
+        row('Constraint', 'A rule that restricts what the chatbot may do, such as C3 Client initiative only') +
+        row('Driver', 'The regulation or policy behind a rule') +
+        row('Work package', 'The change needed to extend an enterprise capability to the chat') +
+        row('Grouping', 'Bands and sets of elements; not capabilities themselves') + '</tbody></table>') +
+      sec('Relationships', '<table class="legend-table"><tbody>' +
+        row('Nesting', 'Composition: a Level 2 is part of its Level 1, a Level 3 part of its Level 2') +
+        row('Serving', 'An enterprise capability serves the chatbot capability that needs it, labelled uses or extends') +
+        row('Realisation', 'A capability realises a rule; a rule that relies on an enterprise capability is realised by both') +
+        row('Influence', 'A driver influences a rule') +
+        row('Association', 'A work package changes an enterprise capability') + '</tbody></table>') +
+      sec('Not shown in PlantUML', '<p>Properties such as uses or extends, domain, agentic and go-live blocking belong on the relationships in your modelling tool. PlantUML shows them as labels where they matter.</p>');
+  }
+
+  function renderIntro() {
+    if (state.tab === 'archimate') { renderArchIntro(); return; }
+    panel.removeAttribute('data-band'); panel.removeAttribute('data-kind');
+    var ins = DATA.caps.filter(function (c) { return c.blocks.length; }).length;
+    var stats = DATA.bands.map(function (b) {
+      var cs = DATA.caps.filter(function (c) { return b.l1.indexOf(c.l1) >= 0; });
+      var n = cs.filter(function (c) { return c.blocks.length; }).length;
+      return '<div class="stat" data-band="' + b.key + '"><span class="stat-name">' + esc(b.name) + '</span><span class="stat-num">' + n + ' of ' + cs.length + '</span><div class="bar" role="img" aria-label="' + n + ' of ' + cs.length + ' realised inside the agent"><span style="width:' + (100 * n / cs.length).toFixed(1) + '%"></span></div></div>';
+    }).join('');
+    panel.innerHTML = '<p class="p-eyebrow">How to read this model</p><h2 class="p-title" tabindex="-1">Three layers, one chatbot</h2>' +
+      '<ul class="model">' +
+      '<li data-band="serve"><span class="sw"></span><div><strong>Capabilities · ' + DATA.caps.length + '</strong><span>What the chatbot must be able to do. They have an owner and a maturity.</span></div></li>' +
+      '<li data-kind="dep"><span class="sw"></span><div><strong>Enterprise dependencies · ' + DATA.deps.length + '</strong><span>Capabilities the bank already has for every channel. The chatbot uses or extends them.</span></div></li>' +
+      '<li data-kind="con"><span class="sw"></span><div><strong>Constraints · ' + DATA.cons.length + '</strong><span>Rules the chatbot complies with or not. Each is enforced by capabilities and may rely on dependencies.</span></div></li></ul>' +
+      sec('How they connect', '<p>A capability enforces constraints and relies on dependencies. 1.4 AI conduct management owns the constraint register, and 7.5 Adversarial resilience assurance tests every constraint.</p>') +
+      sec('Realised by a building block', '<p>' + ins + ' of ' + DATA.caps.length + ' capabilities are realised inside the agent. The rest need people, processes and platforms around it.</p><div class="stats">' + stats + '</div>');
+  }
+  function renderL1(l) {
+    var b = BAND[l.band], cs = capsOf(l.id);
+    panel.setAttribute('data-band', l.band); panel.removeAttribute('data-kind');
+    panel.innerHTML = head('Level 1 · ' + esc(b.name), l.id, l.name) +
+      '<p class="p-lead">' + esc(l.purpose) + '</p>' +
+      (l.from !== l.id ? '<p class="p-note">Was Level 1 number ' + esc(l.from) + ' in version 1.</p>' : '') +
+      sec(cs.length + ' Level 2 capabilities', relList('cap', cs.map(function (c) { return c.id; }))) +
+      '<p class="p-owner">Typical owner: ' + esc(l.owner) + '</p>';
+  }
+  function renderCap(c) {
+    var l = L1[c.l1];
+    panel.setAttribute('data-band', l.band); panel.removeAttribute('data-kind');
+    var h = head(esc(l.id + ' · ' + l.name), c.id, c.name) + '<p class="p-lead">' + esc(c.summary) + '</p><p class="p-note">' + esc(changeNote(c)) + '</p>';
+    h += c.l3.length ? sec('Level 3', '<ul class="l3">' + c.l3.map(function (r) { return '<li><strong>' + esc(r[0]) + '</strong><span>' + esc(r[1]) + '</span></li>'; }).join('') + '</ul>') : sec('What it covers', bullets(c.includes));
+    h += sec('Why it matters', '<p>' + esc(c.why) + '</p>') + sec('Example', '<p>' + esc(c.example) + '</p>');
+    if (c.regs.length) h += sec('Regulatory anchors', bullets(c.regs));
+    if (c.enforces.length) h += sec('Enforces constraints', relList('con', c.enforces));
+    if (c.dependsOn.length) h += sec('Relies on enterprise capabilities', relList('dep', c.dependsOn));
+    h += c.blocks.length ? sec('Realised by', blockChips(c.blocks)) : sec('Realised around the agent', '<p>' + esc(c.around) + '</p>');
+    if (c.domain) h += sec('Domain', '<p>Applies only to ' + esc(DOM_NAME[c.domain].toLowerCase()) + '.</p>');
+    h += '<p class="p-owner">Typical owner: ' + esc(l.owner) + '</p>';
+    panel.innerHTML = h;
+  }
+  function renderDep(d) {
+    panel.setAttribute('data-kind', 'dep'); panel.removeAttribute('data-band');
+    var h = head('Enterprise dependency · ' + (d.relation === 'uses' ? 'Uses' : 'Extends'), d.id, d.name) +
+      '<p class="p-lead">' + esc(d.text) + '</p>' +
+      '<p class="p-note">' + (d.relation === 'uses' ? 'The bank already has this capability; the chatbot relies on it as it is.' : 'The bank already has this capability, but it must be extended to cover the chat channel.') + '</p>';
+    if (d.usedBy.length) h += sec('Needed by chatbot capabilities', relList('cap', d.usedBy));
+    if (d.constraints.length) h += sec('Needed for constraints', relList('con', d.constraints));
+    h += sec('Domain', '<p>' + (domsOf(d).length ? esc(domsOf(d).map(function (x) { return DOM_NAME[x]; }).join(' and ')) : 'Bank-wide') + (d.agentic ? '. Only needed when the bot executes actions.' : '.') + '</p>');
+    h += sec('In ArchiMate', '<p>A capability from the enterprise capability map, with a serving relationship to each chatbot capability above, labelled “' + esc(d.relation) + '”.' + (d.workPackage ? ' The change is the work package “' + esc(d.workPackage) + '”.' : '') + '</p>');
+    h += sec('In version 1', '<p>Came from ' + esc(d.from.join(', ')) + '.</p>');
+    h += '<p class="p-owner">Owner in the bank: ' + esc(d.owner) + '</p>';
+    panel.innerHTML = h;
+  }
+  function renderCon(k) {
+    panel.setAttribute('data-kind', 'con'); panel.removeAttribute('data-band');
+    var enf = k.enforcedBy.slice();
+    enforcersOf(k.id).forEach(function (id) { if (enf.indexOf(id) < 0) enf.push(id); });
+    enf.sort(function (a, b) { var x = a.split('.').map(Number), y = b.split('.').map(Number); return x[0] - y[0] || x[1] - y[1]; });
+    var h = head('Constraint · ' + (domsOf(k).length ? esc(domsOf(k).map(function (x) { return DOM_NAME[x]; }).join(' and ')) : 'Bank-wide'), k.id, k.title) +
+      '<p class="p-lead">' + esc(k.statement) + '</p>' +
+      (k.agentic ? '<p class="p-note">Only applies when the bot executes actions, such as preparing an order.</p>' : '') +
+      sec('Source', bullets(k.sources)) +
+      sec('How to check it', '<p>' + esc(k.check) + '</p>') +
+      sec('Enforced by', relList('cap', enf));
+    if (k.dependsOn.length) h += sec('Relies on enterprise capabilities', relList('dep', k.dependsOn));
+    h += sec('Realised by', blockChips(k.blocks));
+    h += sec('In ArchiMate', '<p>' + (k.archimate === 'Requirement' ? 'A Requirement: it obliges the chatbot to do something.' : 'A Constraint: it restricts what the chatbot may do.') + ' The capabilities under “Enforced by” and the enterprise capabilities it relies on realise it.</p>');
+    h += sec('In version 1', '<p>' + (k.from.length ? 'Came from ' + esc(k.from.join(', ')) + '.' : 'Not in version 1; added in version ' + esc(k.added || '2.0') + '.') + '</p>');
+    h += '<p class="p-owner">Register owner: 1.4 AI conduct management, with compliance</p>';
+    panel.innerHTML = h;
+  }
+
+  // ---------- selection
+  function tabFor(type) { return { cap: 'capabilities', l1: 'capabilities', dep: 'dependencies', con: 'constraints' }[type]; }
+  function markSel() {
+    main.querySelectorAll('[aria-pressed="true"][data-sel]').forEach(function (el) { el.setAttribute('aria-pressed', 'false'); });
+    if (!state.sel) return;
+    var el = main.querySelector('[data-sel="' + state.sel + '"]');
+    if (el && el.hasAttribute('aria-pressed')) el.setAttribute('aria-pressed', 'true');
+  }
+  function setHash(h) { try { history.replaceState(null, '', h ? '#' + h : location.href.split('#')[0]); } catch (e) { /* ignore */ } }
+  function select(sel, opts) {
+    opts = opts || {};
+    if (!sel) { state.sel = null; renderIntro(); panel.classList.remove('is-sheet'); markSel(); setHash(state.tab === 'capabilities' ? '' : state.tab); return; }
+    var p = sel.split(':'), type = p[0], id = p[1], it = lookup(type, id);
+    if (!it) return select(null);
+    state.sel = sel;
+    if (!opts.keepTab && state.tab !== 'mapping' && tabFor(type) !== state.tab) { state.tab = tabFor(type); render(); }
+    ({ cap: renderCap, dep: renderDep, con: renderCon, l1: renderL1 })[type](it);
+    markSel();
+    setHash(type + '-' + id);
+    if (mq.matches) panel.classList.add('is-sheet');
+    panel.scrollTop = 0;
+    if (!opts.quiet) { var t = panel.querySelector('.p-title'); if (t) { try { t.focus({ preventScroll: true }); } catch (e) { t.focus(); } } }
+  }
+  function setTab(tab) {
+    state.tab = tab;
+    render();
+    if (state.sel && tabFor(state.sel.split(':')[0]) !== tab) select(null);
+    else if (!state.sel) select(null);
+    else setHash(state.sel ? state.sel.replace(':', '-') : (tab === 'capabilities' ? '' : tab));
+  }
+
+  layersEl.innerHTML = TABS.map(function (t) { return '<button type="button" role="tab" class="layer" data-tab="' + t.key + '" aria-selected="false"><span class="n">' + t.n + '</span><span class="t">' + esc(t.t) + '</span><span class="d">' + esc(t.d) + '</span></button>'; }).join('');
+  domainsEl.innerHTML = DOMAINS.map(function (d) { return '<button type="button" class="seg-btn" data-domain="' + d.key + '" aria-pressed="' + (d.key === 'all') + '">' + esc(d.name) + '</button>'; }).join('');
+
+  layersEl.addEventListener('click', function (e) { var b = e.target.closest('[data-tab]'); if (b) setTab(b.getAttribute('data-tab')); });
+  domainsEl.addEventListener('click', function (e) { var b = e.target.closest('[data-domain]'); if (!b) return; state.domain = b.getAttribute('data-domain'); apply(); });
+  qEl.addEventListener('input', function () { state.q = qEl.value.trim(); apply(); });
+  countEl.addEventListener('click', function (e) { if (!e.target.closest('[data-reset]')) return; state.q = ''; state.domain = 'all'; qEl.value = ''; apply(); });
+  function copySource() {
+    var st = document.getElementById('arch-status'), pre = document.getElementById('arch-src');
+    var fallback = function () {
+      try { var r = document.createRange(); r.selectNodeContents(pre); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) { /* ignore */ }
+      st.textContent = 'Source selected: press Ctrl+C or Cmd+C to copy';
+    };
+    try {
+      navigator.clipboard.writeText(VIEW[state.view].puml).then(function () { st.textContent = 'Copied'; }, fallback);
+    } catch (e) { fallback(); }
+  }
+  main.addEventListener('click', function (e) {
+    var vb = e.target.closest('[data-view]');
+    if (vb) { state.view = vb.getAttribute('data-view'); render(); setHash('view-' + state.view); return; }
+    if (e.target.closest('[data-fit]')) { state.fit = !state.fit; render(); return; }
+    if (e.target.closest('[data-copy]')) { copySource(); return; }
+    var b = e.target.closest('[data-sel]'); if (!b) return;
+    var go = b.classList.contains('go');
+    select(b.getAttribute('data-sel'), { keepTab: !go && state.tab === 'mapping' });
+  });
+  panel.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]')) { select(null); return; }
+    var b = e.target.closest('[data-sel]'); if (b) select(b.getAttribute('data-sel'));
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.sel) select(null); });
+  var onMq = function () { if (!mq.matches) panel.classList.remove('is-sheet'); else if (state.sel) panel.classList.add('is-sheet'); };
+  if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
+
+  var hash = (location.hash || '').slice(1);
+  var m = /^(cap|dep|con|l1)-(.+)$/.exec(hash);
+  if (TABS.some(function (t) { return t.key === hash; })) state.tab = hash;
+  if (hash.indexOf('view-') === 0 && VIEW[hash.slice(5)]) { state.tab = 'archimate'; state.view = hash.slice(5); }
+  render();
+  if (m && lookup(m[1], m[2])) select(m[1] + ':' + m[2], { quiet: true });
+  else renderIntro();
+})();
+</script>
